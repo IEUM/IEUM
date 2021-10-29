@@ -9,7 +9,7 @@ const StyledTitle = styled.p`
   color: ${(props) => props.color || "white"};
   display: inline-block;
   margin-left: ${(props) => props.marginLeft || 0}px;
-  margin-right: ${(props) => props.marginRright || 0}px;
+  margin-right: ${(props) => props.marginRight || 0}px;
   margin-bottom: ${(props) => props.marginBottom || 0}px;
   margin-top: ${(props) => props.marginTop || 0}px;
   width: ${(props) => props.width || "auto"}px;
@@ -25,6 +25,7 @@ const Text = ({
   lineHeight,
   color,
   marginLeft,
+  marginRight,
   marginBottom,
   marginTop,
   width,
@@ -38,6 +39,7 @@ const Text = ({
         lineHeight={lineHeight}
         color={color}
         marginLeft={marginLeft}
+        marginRight={marginRight}
         marginBottom={marginBottom}
         marginTop={marginTop}
         width={width}
