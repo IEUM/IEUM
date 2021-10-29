@@ -12,7 +12,15 @@ const ButtonBox = styled.button`
   cursor: pointer;
 `;
 
-const Button = ({ name, width, height, color, borderRadius, ...rest }) => {
+const Button = ({
+  name,
+  width,
+  height,
+  color,
+  borderRadius,
+  marginTop,
+  ...rest
+}) => {
   return (
     <div>
       <ButtonBox
@@ -21,6 +29,7 @@ const Button = ({ name, width, height, color, borderRadius, ...rest }) => {
           height: height,
           backgroundColor: color,
           borderRadius: borderRadius,
+          marginTop: marginTop,
         }}
         {...rest}
       >
