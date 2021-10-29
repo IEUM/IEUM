@@ -32,14 +32,16 @@ const Main = () => {
       </LogoBox>
       <Text marginLeft="22">이음 耳音</Text>
       <ButtonBox>
-        <Button
-          name="의료기관 찾기"
-          width="20rem"
-          height="10rem"
-          color="#1F2933"
-          type="submit"
-          marginTop="5rem"
-        />
+        <Link to="/findHospital">
+          <Button
+            name="의료기관 찾기"
+            width="20rem"
+            height="10rem"
+            color="#1F2933"
+            type="submit"
+            marginTop="5rem"
+          />
+        </Link>
         <Button
           name="의약품 찾기"
           width="20rem"
