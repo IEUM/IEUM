@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
 import Search from "../assets/find.png";
+import Filter from "../assets/filter.png";
 
 import Text from "../components/Text";
 import Button from "../components/Button";
@@ -28,7 +29,7 @@ const LocationBox = styled.div`
 const SearchBox = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  //align-items: center;
   background-color: #1f2933;
   padding-top: 1rem;
   margin-top: 1rem;
@@ -37,8 +38,9 @@ const SearchBox = styled.div`
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 2rem;
 `;
 
 const Input = styled.input`
@@ -50,6 +52,17 @@ const Input = styled.input`
   padding-left: 1rem;
   margin-right: 1rem;
   background-color: #1f2933;
+`;
+
+const Menu = styled.div`
+  background-color: #1f2933;
+  margin-top: 1rem;
+  height: 20rem;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const FindHospital = () => {
@@ -68,12 +81,28 @@ const FindHospital = () => {
         <div
           style={{
             borderTop: "2px solid white",
-            width: "17rem",
+            width: "77%",
             paddingBottom: "1rem",
             marginRight: "1rem",
+            marginLeft: "1rem",
           }}
         />
       </SearchBox>
+      <LocationBox>
+        <Image src={Filter} />
+        <Text size="24">필터</Text>
+      </LocationBox>
+      <Menu></Menu>
+      <ButtonBox>
+        <Button
+          name="검색하기"
+          width="20rem"
+          height="5rem"
+          color="#1F2933"
+          type="submit"
+          marginTop="8rem"
+        />
+      </ButtonBox>
     </Wrapper>
   );
 };
