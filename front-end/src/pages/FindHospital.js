@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Location from "../assets/location.png";
@@ -8,6 +8,7 @@ import Filter from "../assets/filter.png";
 
 import Text from "../components/Text";
 import Button from "../components/Button";
+import Modal from "../components/Modal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,7 +30,6 @@ const LocationBox = styled.div`
 const SearchBox = styled.div`
   display: flex;
   flex-direction: column;
-  //align-items: center;
   background-color: #1f2933;
   padding-top: 1rem;
   margin-top: 1rem;
@@ -57,7 +57,7 @@ const Input = styled.input`
 const Menu = styled.div`
   background-color: #1f2933;
   margin-top: 1rem;
-  height: 20rem;
+  height: ${(props) => props.height || "15rem"};
 `;
 
 const ButtonBox = styled.div`
@@ -66,13 +66,23 @@ const ButtonBox = styled.div`
 `;
 
 const FindHospital = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <Wrapper>
-      <LocationBox>
+      <LocationBox onClick={openModal}>
         <Image src={Location} />
         <Text marginRight="3">위치 설정</Text>
         <Image src={ArrowBack} />
       </LocationBox>
+
       <SearchBox>
         <Row>
           <Input />
@@ -103,6 +113,14 @@ const FindHospital = () => {
           marginTop="8rem"
         />
       </ButtonBox>
+
+      <Modal open={modalOpen} close={closeModal} header="Modal heading">
+        <Wrapper>
+          <Menu></Menu>
+          <Menu height="10rem"></Menu>
+          <Menu height="10rem"></Menu>
+        </Wrapper>
+      </Modal>
     </Wrapper>
   );
 };
