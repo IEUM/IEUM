@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
@@ -9,6 +10,7 @@ import Filter from "../assets/filter.png";
 import Text from "../components/Text";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
+import HospitalList from "./HospitalList";
 
 const Wrapper = styled.div`
   display: flex;
@@ -64,6 +66,8 @@ const Menu = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-left: 1rem;
+  color: ${(props) => props.color || "white"};
+  filter: ${(props) => props.blur || "blur(0)"};
   height: ${(props) => props.height || "15rem"};
 `;
 
@@ -83,7 +87,7 @@ const Items = styled.div`
   }
 `;
 
-const hospitals = [
+const categories = [
   { id: 0, text: "전체" },
   { id: 1, text: "내과" },
   { id: 2, text: "의과" },
@@ -98,7 +102,6 @@ const hospitals = [
 ];
 
 const cities = [
-  { id: 0, text: "전국", cityCode: "333333" },
   { id: 1, text: "서울", cityCode: "110000" },
   { id: 2, text: "경기", cityCode: "310000" },
   { id: 3, text: "인천", cityCode: "220000" },
@@ -118,27 +121,97 @@ const cities = [
   { id: 17, text: "제주", cityCode: "390000" },
 ];
 
+const hospitals = [
+  {
+    hospital_id:
+      "JDQ4MTYyMiM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQxIyQzIyQ3OSQyNjE4MzIjNDEjJDEjJDgjJDgz",
+    hospital_name: "가톨릭대학교인천성모병원",
+    class_code: 1,
+    class_name: "상급종합",
+    city_code: 220000,
+    city_name: "인천",
+    gu_code: 220003,
+    gu_name: "인천부평구",
+    dong: "부평동",
+    address_num: 21431,
+    address: "인천광역시 부평구 동수로 56 (부평동)",
+    phone: "032-1544-9004",
+    x: "126.7248987",
+    y: "37.4848309",
+  },
+  {
+    hospital_id:
+      "JDQ4MTYyMiM1MSMkMSMkNCMkODkkMzgxMzUxIzExIyQxIyQzIyQ4OSQ0NjEwMDIjNDEjJDEjJDgjJDgz",
+    hospital_name: "강릉아산병원",
+    class_code: 1,
+    class_name: "상급종합",
+    city_code: 320000,
+    city_name: "강원",
+    gu_code: 320100,
+    gu_name: "강릉시",
+    dong: "",
+    address_num: 25440,
+    address: "강원도 강릉시 사천면 방동길 38 ()",
+    phone: "033-610-3114",
+    x: "128.8578411",
+    y: "37.8184325",
+  },
+  {
+    hospital_id:
+      "JDQ4MTg4MSM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQxIyQzIyQ3OSQ0NjEwMDIjNjEjJDEjJDQjJDgz",
+    hospital_name: "강북삼성병원",
+    class_code: 1,
+    class_name: "상급종합",
+    city_code: 110000,
+    city_name: "서울",
+    gu_code: 110016,
+    gu_name: "종로구",
+    dong: "평동",
+    address_num: 2181,
+    address: "서울특별시 종로구 새문안로 29 (평동)",
+    phone: "02-2001-2001",
+    x: "126.96775",
+    y: "37.5684083",
+  },
+];
+
 const FindHospital = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [show, setShow] = useState(true);
+  const [location, setLocation] = useState("위치설정");
+  const [keyword, setKeyword] = useState("");
 
   const openModal = () => {
     setModalOpen(true);
   };
   const closeModal = () => {
     setModalOpen(false);
+    setShow(!show);
+  };
+
+  const handleChange = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const Find = (hospitals) => {
+    let result = hospitals.filter((data) => {
+      return data.hospital_name.indexOf(keyword) > -1;
+    });
+    return result.map((c) => console.log(c.hospital_name));
   };
 
   return (
     <Wrapper>
+      <HospitalList Find={Find} hospitals="hospitals" />
       <LocationBox onClick={openModal}>
         <Image src={Location} />
-        <Text marginRight="3">위치 설정</Text>
+        <Text marginRight="3">{location}</Text>
         <Image src={ArrowBack} />
       </LocationBox>
       <SearchBox>
         <Row>
-          <Input />
-          <Image src={Search} />
+          <Input name="keyword" value={keyword} onChange={handleChange} />
+          <Image src={Search} onClick={Find(hospitals)} />
         </Row>
         <div
           style={{
@@ -154,21 +227,35 @@ const FindHospital = () => {
         <Image src={Filter} />
         <Text size="24">필터</Text>
       </LocationBox>
-      <Menu direction="column">
-        {hospitals.map((c) => (
-          <Items key={c.id}>{c.text}</Items>
-        ))}
-      </Menu>
-      <ButtonBox>
-        <Button
-          name="검색하기"
-          width="20rem"
-          height="5rem"
-          color="#1F2933"
-          type="submit"
-          marginTop="8rem"
-        />
-      </ButtonBox>
+      {show ? (
+        <Menu
+          color="rgba(255, 255, 255, 0.1)"
+          blur="blur(1.7px)"
+          direction="column"
+        >
+          {categories.map((c) => (
+            <Items key={c.id}>{c.text}</Items>
+          ))}
+        </Menu>
+      ) : (
+        <Menu direction="column">
+          {categories.map((c) => (
+            <Items key={c.id}>{c.text}</Items>
+          ))}
+        </Menu>
+      )}
+      <Link to="/hospitalList">
+        <ButtonBox>
+          <Button
+            name="검색하기"
+            width="20rem"
+            height="5rem"
+            color="#1F2933"
+            type="submit"
+            marginTop="8rem"
+          />
+        </ButtonBox>
+      </Link>
 
       <Modal open={modalOpen} close={closeModal} header="Modal heading">
         <Wrapper>
