@@ -203,6 +203,7 @@ const FindHospital = () => {
     // data.map((hospital, i) => console.log(data[i].hospital_name));
 
     setLocation(data[0].dong + " 외" + hospitalList.length);
+    setKeyword("");
   };
 
   return (
@@ -231,9 +232,9 @@ const FindHospital = () => {
         Find={Find}
         hospitals="hospitals"
         // hospitalList={hospitalList}
-        // data={hospitals.filter(
-        //   (data) => data.hospital_name.indexOf(keyword) > -1
-        // )}
+        data={hospitals.filter(
+          (data) => data.hospital_name.indexOf(keyword) > -1
+        )}
       />
       <LocationBox>
         <Image src={Filter} />

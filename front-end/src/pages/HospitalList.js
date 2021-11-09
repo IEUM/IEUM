@@ -16,23 +16,16 @@ const Menu = styled.div`
   height: ${(props) => props.height || "15rem"};
 `;
 
-const Items = styled.div`
-  width: ${(props) => props.width || "10rem"};
-  font-size: 28px;
+const Card = styled.div``;
 
-  &:hover {
-    background-color: #f6f7fb;
-    color: #1f2933;
-    border-radius: 5px;
-  }
-`;
-
-const HospitalList = ({ Find, hospitals, data }) => {
+const HospitalList = ({ Find, hospitals, data, hospitalList }) => {
   return (
     <>
       {/* <Menu direction="column">
         {data.map((hospital, i) => (
-          <Items key={data[i].hospital_id}>{data[i].hospital_name}</Items>
+          <Card key={data[i].hospital_id}>
+            <h1>{data[i].hospital_name}</h1>
+          </Card>
         ))}
       </Menu> */}
     </>
