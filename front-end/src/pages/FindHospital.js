@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -194,15 +194,19 @@ const FindHospital = () => {
   };
 
   const Find = (hospitals) => {
-    let result = hospitals.filter((data) => {
-      return data.hospital_name.indexOf(keyword) > -1;
-    });
-    return result.map((c) => console.log(c.hospital_name));
+    let data = hospitals.filter(
+      (data) => data.hospital_name.indexOf(keyword) > -1
+    );
+    let hospitalList = [];
+    data.map((hospital, i) => hospitalList.push(data[i].hospital_name));
+    console.log(hospitalList);
+    // data.map((hospital, i) => console.log(data[i].hospital_name));
+
+    setLocation(data[0].dong + " 외" + hospitalList.length);
   };
 
   return (
     <Wrapper>
-      <HospitalList Find={Find} hospitals="hospitals" />
       <LocationBox onClick={openModal}>
         <Image src={Location} />
         <Text marginRight="3">{location}</Text>
@@ -211,7 +215,7 @@ const FindHospital = () => {
       <SearchBox>
         <Row>
           <Input name="keyword" value={keyword} onChange={handleChange} />
-          <Image src={Search} onClick={Find(hospitals)} />
+          <Image src={Search} onClick={() => Find(hospitals)} />
         </Row>
         <div
           style={{
@@ -223,6 +227,14 @@ const FindHospital = () => {
           }}
         />
       </SearchBox>
+      <HospitalList
+        Find={Find}
+        hospitals="hospitals"
+        // hospitalList={hospitalList}
+        // data={hospitals.filter(
+        //   (data) => data.hospital_name.indexOf(keyword) > -1
+        // )}
+      />
       <LocationBox>
         <Image src={Filter} />
         <Text size="24">필터</Text>
