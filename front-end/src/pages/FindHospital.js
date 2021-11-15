@@ -154,14 +154,13 @@ const FindHospital = () => {
             "content-type": "application/json",
           }, // API응답 정보 담기
           body: JSON.stringify(post), //전달 내용
-        });
-        // .then((res) => res.json()) // json 변환
-        // .then((json) => {
-        //   // this.setState({
-        //   //   id: json.text,
-        //   // });
-        //   setKeyword(json.text);
-        // });
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            console.log(json);
+            setResult(JSON.stringify(json));
+            console.log(result);
+          });
       } catch (error) {
         setIsError(true);
         console.log(error);
@@ -171,7 +170,8 @@ const FindHospital = () => {
   };
 
   const onCall = () => {
-    fetch("http://localhost:3001/callbody", {
+    //callbody
+    fetch("http://localhost:3001/keyword", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -180,62 +180,11 @@ const FindHospital = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(typeof json);
+        console.log(json);
         setResult(json.hospital_name);
         console.log(result);
       });
   };
-
-  // const submitKeyword = () => {
-  //   const post = { keyword: keyword };
-
-  //   fetch("http://localhost:3001/keyword", {
-  //     method: "post", // 통신방법
-  //     headers: {
-  //       "content-type": "application/json",
-  //     }, // API응답 정보 담기
-  //     body: JSON.stringify(post), //전달 내용
-  //   });
-  //   // .then((res) => res.json()) // json 변환
-  //   // .then((json) => {
-  //   //   setKeyword(json.text);
-  //   // });
-  // };
-
-  // const onCall = () => {
-  //   setIsError(false);
-  //   // fetch("http://localhost:3001/callbody", {
-  //   //   method: "post",
-  //   //   headers: {
-  //   //     "content-type": "application/json",
-  //   //   },
-  //   //   body: JSON.stringify(),
-  //   // })
-  //   //   .then((res) => res.json())
-  //   //   .then((json) => {
-  //   //     setKeyword(json.text);
-  //   //   });
-
-  //   const fetchData = () => {
-  //     try {
-  //       fetch("http://localhost:3001/callbody", {
-  //         method: "post", // 통신방법
-  //         headers: {
-  //           "content-type": "application/json",
-  //         }, // API응답 정보 담기
-  //         body: JSON.stringify(), //전달 내용
-  //       })
-  //         .then((res) => res.json())
-  //         .then((json) => {
-  //           setKeyword(json.text);
-  //         });
-  //     } catch (error) {
-  //       setIsError(true);
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchData();
-  // };
 
   const Find = (hospitals) => {
     let data = hospitals.filter(
@@ -269,11 +218,7 @@ const FindHospital = () => {
           <button type="submit" onClick={submitKeyword}>
             전송
           </button>
-          <button type="submit" onClick={onCall}>
-            보기
-          </button>
         </Row>
-
         <div
           style={{
             borderTop: "2px solid white",
@@ -283,16 +228,7 @@ const FindHospital = () => {
             marginLeft: "1rem",
           }}
         />
-        <p>{result}</p>
       </SearchBox>
-      {/* <HospitalList
-        Find={Find}
-        hospitals="hospitals"
-        // hospitalList={hospitalList}
-        data={hospitals.filter(
-          (data) => data.hospital_name.indexOf(keyword) > -1
-        )}
-      /> */}
       <LocationBox>
         <Image src={Filter} />
         <Text size="24">필터</Text>

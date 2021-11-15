@@ -6,8 +6,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mysql = require("mysql"); // mysql 모듈 사용
 
-//"../src/pages/FindHospital"
-
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root", //mysql의 id
@@ -38,16 +36,11 @@ app.use(cors());
 //   });
 // });
 
-// app.get("/key", (req, res) =>
-//   res.sendFile(path.join(__dirname, "../src/pages/", "FindHospital.js"))
-// );
-// app.post("/key", (req, res) => res.send(req.body));
-
 app.post("/keyword", (req, res) => {
   const keyword = req.body.keyword;
   console.log(keyword);
   connection.query(
-    "SELECT hospital_name FROM hospital WHERE hospital_name LIKE '%" +
+    "SELECT * FROM hospital WHERE hospital_name LIKE '%" +
       keyword +
       "%' LIMIT 100",
     function (err, rows, fields) {
@@ -55,29 +48,11 @@ app.post("/keyword", (req, res) => {
         console.log("실패");
         // console.log(err);
       } else {
-        //console.log("성공");
-        res.send(rows);
-        console.log(rows);
-      }
-    }
-  );
-
-  // 보내는 데이터
-  // const sendText = {
-  //   text: "express 데이터",
-  // };
-  // res.send(sendText);
-});
-
-app.post("/callbody", (req, res) => {
-  connection.query(
-    "SELECT * FROM hospital LIMIT 10",
-    function (err, rows, fields) {
-      if (err) {
-        console.log("불러오기 실패");
-      } else {
-        console.log("불러오기 성공");
-        res.send(rows[0]);
+        const sendAllReview = rows.filter((row) => {
+          return row.hospital_name.indexOf(keyword) !== -1;
+        });
+        res.send(sendAllReview);
+        console.log(sendAllReview);
       }
     }
   );
