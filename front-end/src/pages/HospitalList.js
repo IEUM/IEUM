@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+
+import Button from "../components/Button";
 
 const Menu = styled.div`
   display: flex;
@@ -18,7 +20,44 @@ const Menu = styled.div`
 
 const Card = styled.div``;
 
-const HospitalList = ({ Find, hospitals, data, hospitalList }) => {
+const HospitalList = () => {
+  const [data, setData] = useState("");
+
+  const submitId = () => {
+    const post = {
+      test: this.state.testbody,
+    };
+
+    fetch("http://localhost:3001/idplz", {
+      method: "post", // 통신방법
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(post),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          testbody: json.text,
+        });
+      });
+  };
+  const onCall = () => {
+    fetch("http://localhost:3001/callbody", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          data: json.test_body,
+        });
+      });
+  };
+
   return (
     <>
       {/* <Menu direction="column">
@@ -28,6 +67,20 @@ const HospitalList = ({ Find, hospitals, data, hospitalList }) => {
           </Card>
         ))}
       </Menu> */}
+
+      <h3>
+        데이터 찾기 <br />
+        {data}
+      </h3>
+      <Button
+        onClick={() => onCall}
+        name="찾기"
+        width="20rem"
+        height="5rem"
+        color="#1F2933"
+        type="submit"
+        marginTop="8rem"
+      />
     </>
   );
 };

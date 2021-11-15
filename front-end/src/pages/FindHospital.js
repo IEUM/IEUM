@@ -10,7 +10,7 @@ import Filter from "../assets/filter.png";
 import Text from "../components/Text";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
-import HospitalList from "./HospitalList";
+// import HospitalList from "./HospitalList";
 
 const Wrapper = styled.div`
   display: flex;
@@ -180,6 +180,7 @@ const FindHospital = () => {
   const [show, setShow] = useState(true);
   const [location, setLocation] = useState("위치설정");
   const [keyword, setKeyword] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
@@ -192,6 +193,66 @@ const FindHospital = () => {
   const handleChange = (e) => {
     setKeyword(e.target.value);
   };
+
+  const submitKeyword = () => {
+    setIsError(false);
+    const fetchData = () => {
+      try {
+        const post = { keyword: keyword };
+
+        fetch("http://localhost:3001/keyword", {
+          method: "post", // 통신방법
+          headers: {
+            "content-type": "application/json",
+          }, // API응답 정보 담기
+          body: JSON.stringify(post), //전달 내용
+        });
+        // .then((res) => res.json()) // json 변환
+        // .then((json) => {
+        //   // this.setState({
+        //   //   id: json.text,
+        //   // });
+        //   setKeyword(json.text);
+        // });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
+
+  const onCall = () => {
+    fetch("http://localhost:3001/callbody", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setKeyword(json.text);
+      });
+  };
+
+  // const submitKeyword = () => {
+  //   const post = { keyword: keyword };
+
+  //   fetch("http://localhost:3001/keyword", {
+  //     method: "post", // 통신방법
+  //     headers: {
+  //       "content-type": "application/json",
+  //     }, // API응답 정보 담기
+  //     body: JSON.stringify(post), //전달 내용
+  //   })
+  //     .then((res) => res.json()) // json 변환
+  //     .then((json) => {
+  //       // this.setState({
+  //       //   id: json.text,
+  //       // });
+  //       setKeyword(json.text);
+  //     });
+  // };
 
   const Find = (hospitals) => {
     let data = hospitals.filter(
@@ -216,7 +277,8 @@ const FindHospital = () => {
       <SearchBox>
         <Row>
           <Input name="keyword" value={keyword} onChange={handleChange} />
-          <Image src={Search} onClick={() => Find(hospitals)} />
+          {/* <Image src={Search} onClick={() => Find(hospitals)} /> */}
+          <button onClick={onCall}>전송</button>
         </Row>
         <div
           style={{
@@ -227,15 +289,16 @@ const FindHospital = () => {
             marginLeft: "1rem",
           }}
         />
+        <p>{keyword}</p>
       </SearchBox>
-      <HospitalList
+      {/* <HospitalList
         Find={Find}
         hospitals="hospitals"
         // hospitalList={hospitalList}
         data={hospitals.filter(
           (data) => data.hospital_name.indexOf(keyword) > -1
         )}
-      />
+      /> */}
       <LocationBox>
         <Image src={Filter} />
         <Text size="24">필터</Text>
