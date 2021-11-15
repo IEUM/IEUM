@@ -49,7 +49,7 @@ const Input = styled.input`
   color: white;
   outline: none;
   border: none;
-  width: 17rem;
+  width: 70%;
   height: 2rem;
   padding-left: 1rem;
   margin-right: 1rem;
@@ -121,65 +121,12 @@ const cities = [
   { id: 17, text: "제주", cityCode: "390000" },
 ];
 
-const hospitals = [
-  {
-    hospital_id:
-      "JDQ4MTYyMiM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQxIyQzIyQ3OSQyNjE4MzIjNDEjJDEjJDgjJDgz",
-    hospital_name: "가톨릭대학교인천성모병원",
-    class_code: 1,
-    class_name: "상급종합",
-    city_code: 220000,
-    city_name: "인천",
-    gu_code: 220003,
-    gu_name: "인천부평구",
-    dong: "부평동",
-    address_num: 21431,
-    address: "인천광역시 부평구 동수로 56 (부평동)",
-    phone: "032-1544-9004",
-    x: "126.7248987",
-    y: "37.4848309",
-  },
-  {
-    hospital_id:
-      "JDQ4MTYyMiM1MSMkMSMkNCMkODkkMzgxMzUxIzExIyQxIyQzIyQ4OSQ0NjEwMDIjNDEjJDEjJDgjJDgz",
-    hospital_name: "강릉아산병원",
-    class_code: 1,
-    class_name: "상급종합",
-    city_code: 320000,
-    city_name: "강원",
-    gu_code: 320100,
-    gu_name: "강릉시",
-    dong: "",
-    address_num: 25440,
-    address: "강원도 강릉시 사천면 방동길 38 ()",
-    phone: "033-610-3114",
-    x: "128.8578411",
-    y: "37.8184325",
-  },
-  {
-    hospital_id:
-      "JDQ4MTg4MSM1MSMkMSMkMCMkODkkMzgxMzUxIzExIyQxIyQzIyQ3OSQ0NjEwMDIjNjEjJDEjJDQjJDgz",
-    hospital_name: "강북삼성병원",
-    class_code: 1,
-    class_name: "상급종합",
-    city_code: 110000,
-    city_name: "서울",
-    gu_code: 110016,
-    gu_name: "종로구",
-    dong: "평동",
-    address_num: 2181,
-    address: "서울특별시 종로구 새문안로 29 (평동)",
-    phone: "02-2001-2001",
-    x: "126.96775",
-    y: "37.5684083",
-  },
-];
-
 const FindHospital = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [show, setShow] = useState(true);
   const [location, setLocation] = useState("위치설정");
   const [keyword, setKeyword] = useState("");
+  const [result, setResult] = useState("");
   const [isError, setIsError] = useState(false);
 
   const openModal = () => {
@@ -194,6 +141,7 @@ const FindHospital = () => {
     setKeyword(e.target.value);
   };
 
+  // input 키워드 보냄
   const submitKeyword = () => {
     setIsError(false);
     const fetchData = () => {
@@ -215,6 +163,7 @@ const FindHospital = () => {
         //   setKeyword(json.text);
         // });
       } catch (error) {
+        setIsError(true);
         console.log(error);
       }
     };
@@ -231,7 +180,9 @@ const FindHospital = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        setKeyword(json.text);
+        console.log(typeof json);
+        setResult(json.hospital_name);
+        console.log(result);
       });
   };
 
@@ -244,14 +195,46 @@ const FindHospital = () => {
   //       "content-type": "application/json",
   //     }, // API응답 정보 담기
   //     body: JSON.stringify(post), //전달 내용
-  //   })
-  //     .then((res) => res.json()) // json 변환
-  //     .then((json) => {
-  //       // this.setState({
-  //       //   id: json.text,
-  //       // });
-  //       setKeyword(json.text);
-  //     });
+  //   });
+  //   // .then((res) => res.json()) // json 변환
+  //   // .then((json) => {
+  //   //   setKeyword(json.text);
+  //   // });
+  // };
+
+  // const onCall = () => {
+  //   setIsError(false);
+  //   // fetch("http://localhost:3001/callbody", {
+  //   //   method: "post",
+  //   //   headers: {
+  //   //     "content-type": "application/json",
+  //   //   },
+  //   //   body: JSON.stringify(),
+  //   // })
+  //   //   .then((res) => res.json())
+  //   //   .then((json) => {
+  //   //     setKeyword(json.text);
+  //   //   });
+
+  //   const fetchData = () => {
+  //     try {
+  //       fetch("http://localhost:3001/callbody", {
+  //         method: "post", // 통신방법
+  //         headers: {
+  //           "content-type": "application/json",
+  //         }, // API응답 정보 담기
+  //         body: JSON.stringify(), //전달 내용
+  //       })
+  //         .then((res) => res.json())
+  //         .then((json) => {
+  //           setKeyword(json.text);
+  //         });
+  //     } catch (error) {
+  //       setIsError(true);
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchData();
   // };
 
   const Find = (hospitals) => {
@@ -276,10 +259,21 @@ const FindHospital = () => {
       </LocationBox>
       <SearchBox>
         <Row>
-          <Input name="keyword" value={keyword} onChange={handleChange} />
+          <Input
+            type="text"
+            name="keyword"
+            value={keyword}
+            onChange={handleChange}
+          />
           {/* <Image src={Search} onClick={() => Find(hospitals)} /> */}
-          <button onClick={onCall}>전송</button>
+          <button type="submit" onClick={submitKeyword}>
+            전송
+          </button>
+          <button type="submit" onClick={onCall}>
+            보기
+          </button>
         </Row>
+
         <div
           style={{
             borderTop: "2px solid white",
@@ -289,7 +283,7 @@ const FindHospital = () => {
             marginLeft: "1rem",
           }}
         />
-        <p>{keyword}</p>
+        <p>{result}</p>
       </SearchBox>
       {/* <HospitalList
         Find={Find}
