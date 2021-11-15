@@ -1,7 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import Location from "../assets/location.png";
+import ArrowBack from "../assets/arrow_back.png";
+
 import Button from "../components/Button";
+import Text from "../components/Text";
+import Modal from "../components/Modal";
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const LocationBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+`;
+
+const Image = styled.img`
+  width: 40px;
+  height: 40px;
+`;
 
 const Menu = styled.div`
   display: flex;
@@ -20,46 +42,26 @@ const Menu = styled.div`
 
 const Card = styled.div``;
 
-const HospitalList = () => {
-  const [data, setData] = useState("");
+const HospitalList = ({ location }) => {
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const submitId = () => {
-    const post = {
-      test: this.state.testbody,
-    };
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
-    fetch("http://localhost:3001/idplz", {
-      method: "post", // 통신방법
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(post),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        this.setState({
-          testbody: json.text,
-        });
-      });
-  };
-  const onCall = () => {
-    fetch("http://localhost:3001/callbody", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        this.setState({
-          data: json.test_body,
-        });
-      });
-  };
+  const where = location.state.where;
+  const result = location.state.result;
 
   return (
-    <>
+    <Wrapper>
+      <LocationBox onClick={openModal}>
+        <Image src={Location} />
+        <Text marginRight="3">{where}</Text>
+        <Image src={ArrowBack} />
+      </LocationBox>
       {/* <Menu direction="column">
         {data.map((hospital, i) => (
           <Card key={data[i].hospital_id}>
@@ -70,10 +72,9 @@ const HospitalList = () => {
 
       <h3>
         데이터 찾기 <br />
-        {data}
       </h3>
       <Button
-        onClick={() => onCall}
+        // onClick={() => onCall}
         name="찾기"
         width="20rem"
         height="5rem"
@@ -81,7 +82,7 @@ const HospitalList = () => {
         type="submit"
         marginTop="8rem"
       />
-    </>
+    </Wrapper>
   );
 };
 

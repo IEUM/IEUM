@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,6 @@ import Filter from "../assets/filter.png";
 import Text from "../components/Text";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
-// import HospitalList from "./HospitalList";
 
 const Wrapper = styled.div`
   display: flex;
@@ -124,7 +123,7 @@ const cities = [
 const FindHospital = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [show, setShow] = useState(true);
-  const [location, setLocation] = useState("위치설정");
+  const [where, setWhere] = useState("위치설정");
   const [keyword, setKeyword] = useState("");
   const [result, setResult] = useState("");
   const [isError, setIsError] = useState(false);
@@ -195,7 +194,7 @@ const FindHospital = () => {
     console.log(hospitalList);
     // data.map((hospital, i) => console.log(data[i].hospital_name));
 
-    setLocation(data[0].dong + " 외" + hospitalList.length);
+    setWhere(data[0].dong + " 외" + hospitalList.length);
     setKeyword("");
   };
 
@@ -203,7 +202,7 @@ const FindHospital = () => {
     <Wrapper>
       <LocationBox onClick={openModal}>
         <Image src={Location} />
-        <Text marginRight="3">{location}</Text>
+        <Text marginRight="3">{where}</Text>
         <Image src={ArrowBack} />
       </LocationBox>
       <SearchBox>
@@ -214,15 +213,13 @@ const FindHospital = () => {
             value={keyword}
             onChange={handleChange}
           />
-          {/* <Image src={Search} onClick={() => Find(hospitals)} /> */}
-          <button type="submit" onClick={submitKeyword}>
-            전송
-          </button>
+          <Image src={Search} onClick={submitKeyword} />
+          {/* <ImgButton type="submit" onClick={submitKeyword} /> */}
         </Row>
         <div
           style={{
             borderTop: "2px solid white",
-            width: "77%",
+            width: "76%",
             paddingBottom: "1rem",
             marginRight: "1rem",
             marginLeft: "1rem",
@@ -250,7 +247,15 @@ const FindHospital = () => {
           ))}
         </Menu>
       )}
-      <Link to="/hospitalList">
+      <Link
+        to={{
+          pathname: `/hospitalList`,
+          state: {
+            where: where,
+            result: result,
+          },
+        }}
+      >
         <ButtonBox>
           <Button
             name="검색하기"
