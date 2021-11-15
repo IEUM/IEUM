@@ -48,10 +48,16 @@ const Card = styled.div`
   background-color: #1f2933;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
   margin: 1rem 1rem 0rem 1rem;
-  padding: 0.5rem 0rem 1rem 1rem;
+  padding: 1rem 0.7rem 2rem 0.7rem;
   border-radius: 10px;
   color: ${(props) => props.color || "white"};
-  height: ${(props) => props.height || "20rem"};
+  min-height: ${(props) => props.height || "20rem"};
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const HospitalList = ({ location }) => {
@@ -95,7 +101,30 @@ const HospitalList = ({ location }) => {
       <>
         {result.map((hospital, i) => (
           <Card key={result[i].hospital_id}>
-            <h2>{result[i].hospital_name}</h2>
+            <h1>{result[i].hospital_name}</h1>
+            <Text weight="500" size="25">
+              전화번호
+            </Text>
+            <Text marginLeft="20" weight="500" size="25">
+              {result[i].phone !== "" ? result[i].phone : "데이터가 없습니다."}
+            </Text>
+            <Text weight="500" marginTop="10" size="25">
+              주소
+            </Text>
+            <Text marginLeft="20" weight="500" size="25">
+              {result[i].address}
+            </Text>
+            <ButtonBox>
+              <Button
+                name="후기 보러 가기"
+                fontSize="1.5"
+                width="15rem"
+                height="2.5rem"
+                color="#1F2933"
+                type="submit"
+                marginTop="1.5rem"
+              />
+            </ButtonBox>
           </Card>
         ))}
       </>
