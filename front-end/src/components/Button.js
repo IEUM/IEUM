@@ -4,7 +4,7 @@ import styled from "styled-components";
 const ButtonBox = styled.button`
   color: white;
   font-weight: 700;
-  font-size: 2.4rem;
+  font-size: ${(props) => props.fontSize || 2.4}rem;
   height: 2.5rem;
   border-radius: 6px;
   border-color: #f6f7fb;
@@ -25,13 +25,13 @@ const Button = ({
   return (
     <div>
       <ButtonBox
+        fontSize={fontSize}
         style={{
           width: width,
           height: height,
           backgroundColor: color,
           borderRadius: borderRadius,
           marginTop: marginTop,
-          fontSize: fontSize,
         }}
         {...rest}
       >

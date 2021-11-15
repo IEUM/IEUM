@@ -214,7 +214,7 @@ const FindHospital = () => {
             onChange={handleChange}
           />
           <Image src={Search} onClick={submitKeyword} />
-          {/* <ImgButton type="submit" onClick={submitKeyword} /> */}
+          {/* <button type="submit" onClick={submitKeyword} /> */}
         </Row>
         <div
           style={{

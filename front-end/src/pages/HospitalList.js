@@ -25,22 +25,34 @@ const Image = styled.img`
   height: 40px;
 `;
 
-const Menu = styled.div`
+const SearchBox = styled.div`
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: ${(props) => props.direction || "row"};
-  background-color: #1f2933;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 1rem;
-  color: ${(props) => props.color || "white"};
-  filter: ${(props) => props.blur || "blur(0)"};
-  height: ${(props) => props.height || "15rem"};
+  flex-direction: column;
+  border-bottom: 2px white solid;
+  width: 90%;
+  padding: 1.3rem 0.3rem 0.5rem 0.3rem;
+  margin: 0 auto;
 `;
 
-const Card = styled.div``;
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Card = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: #1f2933;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  margin: 1rem 1rem 0rem 1rem;
+  padding: 0.5rem 0rem 1rem 1rem;
+  border-radius: 10px;
+  color: ${(props) => props.color || "white"};
+  height: ${(props) => props.height || "20rem"};
+`;
 
 const HospitalList = ({ location }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -52,8 +64,11 @@ const HospitalList = ({ location }) => {
     setModalOpen(false);
   };
 
+  const [cards, setCards] = useState(false);
+
   const where = location.state.where;
-  const result = location.state.result;
+  const result = JSON.parse(location.state.result);
+  console.log(result);
 
   return (
     <Wrapper>
@@ -62,26 +77,28 @@ const HospitalList = ({ location }) => {
         <Text marginRight="3">{where}</Text>
         <Image src={ArrowBack} />
       </LocationBox>
-      {/* <Menu direction="column">
-        {data.map((hospital, i) => (
-          <Card key={data[i].hospital_id}>
-            <h1>{data[i].hospital_name}</h1>
+      <SearchBox>
+        <Row>
+          <Text size="24px">{result.length} 개의 결과</Text>
+          <Button
+            name="지도 보기"
+            fontSize="1.5"
+            width="10rem"
+            height="2.5rem"
+            color="#1F2933"
+            type="submit"
+            marginTop="0rem"
+          />
+        </Row>
+      </SearchBox>
+
+      <>
+        {result.map((hospital, i) => (
+          <Card key={result[i].hospital_id}>
+            <h2>{result[i].hospital_name}</h2>
           </Card>
         ))}
-      </Menu> */}
-
-      <h3>
-        데이터 찾기 <br />
-      </h3>
-      <Button
-        // onClick={() => onCall}
-        name="찾기"
-        width="20rem"
-        height="5rem"
-        color="#1F2933"
-        type="submit"
-        marginTop="8rem"
-      />
+      </>
     </Wrapper>
   );
 };
