@@ -60,6 +60,52 @@ const ButtonBox = styled.div`
   align-items: center;
 `;
 
+const Menu = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: ${(props) => props.direction || "row"};
+  background-color: #1f2933;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  color: ${(props) => props.color || "white"};
+  filter: ${(props) => props.blur || "blur(0)"};
+  height: ${(props) => props.height || "15rem"};
+`;
+
+const Items = styled.div`
+  width: ${(props) => props.width || "10rem"};
+  font-size: 28px;
+
+  &:hover {
+    background-color: #f6f7fb;
+    color: #1f2933;
+    border-radius: 5px;
+  }
+`;
+
+const cities = [
+  { id: 1, text: "서울", cityCode: "110000" },
+  { id: 2, text: "경기", cityCode: "310000" },
+  { id: 3, text: "인천", cityCode: "220000" },
+  { id: 4, text: "강원", cityCode: "320000" },
+  { id: 5, text: "대전", cityCode: "250000" },
+  { id: 6, text: "세종", cityCode: "410000" },
+  { id: 7, text: "충남", cityCode: "340000" },
+  { id: 8, text: "충북", cityCode: "330000" },
+  { id: 9, text: "부산", cityCode: "210000" },
+  { id: 10, text: "울산", cityCode: "260000" },
+  { id: 11, text: "경남", cityCode: "380000" },
+  { id: 12, text: "경북", cityCode: "370000" },
+  { id: 13, text: "대구", cityCode: "230000" },
+  { id: 14, text: "광주", cityCode: "240000" },
+  { id: 15, text: "전남", cityCode: "360000" },
+  { id: 16, text: "전북", cityCode: "350000" },
+  { id: 17, text: "제주", cityCode: "390000" },
+];
+
 const HospitalList = ({ location }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -127,6 +173,20 @@ const HospitalList = ({ location }) => {
             </ButtonBox>
           </Card>
         ))}
+
+        <Modal open={modalOpen} close={closeModal} header="Modal heading">
+          <Wrapper>
+            <Menu>
+              {cities.map((c) => (
+                <Items width="5rem" key={c.id}>
+                  {c.text}
+                </Items>
+              ))}
+            </Menu>
+            <Menu height="10rem"></Menu>
+            <Menu height="10rem"></Menu>
+          </Wrapper>
+        </Modal>
       </>
     </Wrapper>
   );
