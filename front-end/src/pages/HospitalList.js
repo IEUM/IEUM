@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
@@ -160,16 +161,27 @@ const HospitalList = ({ location }) => {
             <Text marginLeft="20" weight="500" size="25">
               {result[i].address}
             </Text>
+
             <ButtonBox>
-              <Button
-                name="후기 보러 가기"
-                fontSize="1.5"
-                width="15rem"
-                height="2.5rem"
-                color="#1F2933"
-                type="submit"
-                marginTop="1.5rem"
-              />
+              <Link
+                to={{
+                  pathname: `/reviewList`,
+                  state: {
+                    result: result,
+                    key: i,
+                  },
+                }}
+              >
+                <Button
+                  name="후기 보러 가기"
+                  fontSize="1.5"
+                  width="15rem"
+                  height="2.5rem"
+                  color="#1F2933"
+                  type="submit"
+                  marginTop="1.5rem"
+                />
+              </Link>
             </ButtonBox>
           </Card>
         ))}

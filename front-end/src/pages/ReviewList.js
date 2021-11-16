@@ -48,15 +48,19 @@ const Row = styled.div`
   align-items: center;
 `;
 
-const ReviewList = () => {
-  const [hospitalName, setHospitalName] = useState("병원이름");
+const ReviewList = ({ location }) => {
+  const result = location.state.result;
+  const key = location.state.key;
+  console.log(result);
+  console.log(key);
+
   return (
     <Wrapper>
       <Box>
         <h2>후기</h2>
       </Box>
       <Box marginTop="1rem">
-        <h1>{hospitalName}</h1>
+        <h1>{result[key].hospital_name}</h1>
       </Box>
       <Box
         marginTop="1rem"
