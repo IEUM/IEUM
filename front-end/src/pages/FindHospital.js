@@ -170,35 +170,35 @@ const FindHospital = () => {
     fetchData();
   };
 
-  const onCall = () => {
-    //callbody
-    fetch("http://localhost:3001/keyword", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        setResult(json.hospital_name);
-        console.log(result);
-      });
-  };
+  // const onCall = () => {
+  //   //callbody
+  //   fetch("http://localhost:3001/keyword", {
+  //     method: "post",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((json) => {
+  //       console.log(json);
+  //       setResult(json.hospital_name);
+  //       console.log(result);
+  //     });
+  // };
 
-  const Find = (hospitals) => {
-    let data = hospitals.filter(
-      (data) => data.hospital_name.indexOf(keyword) > -1
-    );
-    let hospitalList = [];
-    data.map((hospital, i) => hospitalList.push(data[i].hospital_name));
-    console.log(hospitalList);
-    // data.map((hospital, i) => console.log(data[i].hospital_name));
+  // const Find = (hospitals) => {
+  //   let data = hospitals.filter(
+  //     (data) => data.hospital_name.indexOf(keyword) > -1
+  //   );
+  //   let hospitalList = [];
+  //   data.map((hospital, i) => hospitalList.push(data[i].hospital_name));
+  //   console.log(hospitalList);
+  //   // data.map((hospital, i) => console.log(data[i].hospital_name));
 
-    setWhere(data[0].dong + " 외" + hospitalList.length);
-    setKeyword("");
-  };
+  //   setWhere(data[0].dong + " 외" + hospitalList.length);
+  //   setKeyword("");
+  // };
 
   return (
     <Wrapper>

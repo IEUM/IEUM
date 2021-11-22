@@ -59,20 +59,24 @@ app.post("/keyword", (req, res) => {
 });
 
 app.post("/review", (req, res) => {
-  const result = req.body.result;
-  console.log(result);
-  connection.query("SELECT * FROM review", function (err, rows, fields) {
-    if (err) {
-      console.log("실패");
-      // console.log(err);
-    } else {
-      const sendAllReview = rows.filter((row) => {
-        return row.hospital_name.indexOf() !== -1;
-      });
-      res.send(sendAllReview);
-      console.log(sendAllReview);
+  const hospital_id = req.body.hospital_id;
+  console.log(hospital_id);
+  connection.query(
+    "SELECT * FROM review WHERE hospital_id LIKE '%" + hospital_id + "%'",
+    function (err, rows, fields) {
+      if (err) {
+        console.log("실패");
+      } else {
+        // const sendAllReview = rows.filter((row) => {
+        //   return row.hospital_id.indexOf() !== -1;
+        // });
+        // res.send(sendAllReview);
+        // console.log(sendAllReview);
+        res.send(rows);
+        console.log(rows);
+      }
     }
-  });
+  );
 });
 
 app.listen(port, () => {
