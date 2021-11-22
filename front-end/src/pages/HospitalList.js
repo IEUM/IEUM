@@ -123,27 +123,23 @@ const HospitalList = ({ location }) => {
   const where = location.state.where;
   const result = JSON.parse(location.state.result);
 
-  // const submitResult = (i) => {
-  //   const fetchData = (i) => {
-  //     try {
-  //       const post = { result: result[i] };
+  // const [reviews, setReviews] = useState("");
+  // const submitHospitalId = (key) => {
+  //   const post = { hospital_id: result[key].hospital_id };
 
-  //       fetch("http://localhost:3001/review", {
-  //         method: "post", // 통신방법
-  //         headers: {
-  //           "content-type": "application/json",
-  //         }, // API응답 정보 담기
-  //         body: JSON.stringify(post), //전달 내용
-  //       })
-  //         .then((res) => res.json())
-  //         .then((json) => {
-  //           console.log(json);
-  //         });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchData();
+  //   fetch("http://localhost:3001/review", {
+  //     method: "post", // 통신방법
+  //     headers: {
+  //       "content-type": "application/json",
+  //     }, // API응답 정보 담기
+  //     body: JSON.stringify(post), //전달 내용
+  //   })
+  //     .then((res) => res.json())
+  //     .then((json) => {
+  //       setReviews(JSON.stringify(json));
+  //       //temp = JSON.stringify(json);
+  //       //setReviews(temp);
+  //     });
   // };
 
   return (
