@@ -3,7 +3,7 @@ import Textarea from "../components/Textarea";
 import Button from "../components/Button";
 import Text from "../components/Text";
 
-import { Wrapper, Box, TextBox, Row } from "./Presenter/Presenter";
+import { Wrapper, Box, Row } from "./Presenter/Presenter";
 
 const WriteReview = () => {
   return (
