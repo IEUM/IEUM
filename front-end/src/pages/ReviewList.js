@@ -9,23 +9,7 @@ import User from "../assets/user.png";
 import Play from "../assets/play.png";
 import palette from "../styles/palette";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Box = styled.div`
-  display: flex;
-  flex-direction: ${(props) => props.flexDirection || "row"};
-  justify-content: ${(props) => props.justifyContent || "center"};
-  align-items: center;
-  width: 100%;
-  background-color: ${palette.darkBlack};
-  margin-top: ${(props) => props.marginTop || "0px"};
-  min-height: ${(props) => props.height || "4rem"};
-  padding-left: ${(props) => props.paddingLeft || "0rem"};
-`;
+import { Wrapper, Box } from "./Presenter/Presenter";
 
 const Image = styled.img`
   width: 40px;
@@ -108,14 +92,23 @@ const ReviewList = ({ location }) => {
         </Row>
         <LikeBox></LikeBox>
       </Box>
-      <Button
-        name="글쓰기"
-        width="20rem"
-        height="5rem"
-        color="#1F2933"
-        type="submit"
-        marginTop="8rem"
-      />
+      <Link
+        to={{
+          pathname: `/writeReview`,
+          state: {
+            result: result,
+            id: result[key].hospital_id,
+          },
+        }}
+      >
+        <Button
+          name="글쓰기"
+          width="20rem"
+          height="5rem"
+          type="submit"
+          marginTop="8rem"
+        />
+      </Link>
     </Wrapper>
   );
 };

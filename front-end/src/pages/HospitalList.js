@@ -157,7 +157,6 @@ const HospitalList = ({ location }) => {
             fontSize="1.5"
             width="10rem"
             height="2.5rem"
-            color="#1F2933"
             type="submit"
             marginTop="0rem"
           />
@@ -202,7 +201,6 @@ const HospitalList = ({ location }) => {
                   fontSize="1.5"
                   width="15rem"
                   height="2.5rem"
-                  color="#1F2933"
                   type="submit"
                   marginTop="1.5rem"
                   // onClick={}
