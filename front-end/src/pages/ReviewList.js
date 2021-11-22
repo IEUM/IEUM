@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 import User from "../assets/user.png";
 import Play from "../assets/play.png";
-import palette from "../styles/palette";
 
 import { Wrapper, Box, TextBox, Row } from "./Presenter/Presenter";
 
@@ -87,7 +86,7 @@ const ReviewList = ({ location }) => {
           pathname: `/writeReview`,
           state: {
             result: result,
-            id: result[key].hospital_id,
+            key: key,
           },
         }}
       >

@@ -1,17 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import Textarea from "../components/Textarea";
 import Button from "../components/Button";
 import Text from "../components/Text";
 
 import { Wrapper, Box, Row } from "./Presenter/Presenter";
 
-const WriteReview = () => {
+const WriteReview = ({ location }) => {
+  const result = location.state.result;
+  const key = location.state.key;
+  const today = new Date();
+  let year = today.getFullYear();
+  let month = ("0" + (today.getMonth() + 1)).slice(-2);
+  let day = ("0" + today.getDate()).slice(-2);
+
+  let dateString = year + "-" + month + "-" + day;
+
+  const [content, setContent] = useState("");
+
+  const submitContent = () => {
+    const post = {
+      content: content,
+      hospital_id: result[key].hospital_id,
+      today: dateString,
+    };
+
+    fetch("http://localhost:3001/write", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+    console.log(post);
+    // .then((res) => res.json())
+    // .then((json) => {
+    //   this.setState({
+    //     testbody: json.text,
+    //   });
+    // });
+  };
+
   return (
     <Wrapper>
       <Box>
         <h2>글쓰기</h2>
       </Box>
-      <Textarea />
+      <Textarea onChange={(e) => setContent(e.target.value)} />
       <Box flexDirection="column" marginTop="1rem" backgroundColor="none">
         <Box
           backgroundColor="none"
@@ -49,6 +83,7 @@ const WriteReview = () => {
             type="submit"
             marginTop="3rem"
             fontSize="1.6"
+            onClick={() => submitContent()}
           />
           <Button
             name="취소"
