@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
+import palette from "../styles/palette";
 
 import Button from "../components/Button";
 import Text from "../components/Text";
@@ -29,7 +30,7 @@ const Image = styled.img`
 const SearchBox = styled.div`
   display: flex;
   flex-direction: column;
-  border-bottom: 2px white solid;
+  border-bottom: 2px ${palette.white} solid;
   width: 90%;
   padding: 1.3rem 0.3rem 0.5rem 0.3rem;
   margin: 0 auto;
@@ -46,8 +47,8 @@ const Card = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  background-color: #1f2933;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+  background-color: ${palette.darkBlack};
+  box-shadow: 0px 5px 10px ${palette.shadow};
   margin: 1rem 1rem 0rem 1rem;
   padding: 1rem 0.7rem 2rem 0.7rem;
   border-radius: 10px;
@@ -81,8 +82,8 @@ const Items = styled.div`
   font-size: 28px;
 
   &:hover {
-    background-color: #f6f7fb;
-    color: #1f2933;
+    background-color: ${palette.ivory};
+    color: ${palette.darkBlack};
     border-radius: 5px;
   }
 `;
@@ -121,7 +122,29 @@ const HospitalList = ({ location }) => {
 
   const where = location.state.where;
   const result = JSON.parse(location.state.result);
-  console.log(result);
+
+  const submitResult = (i) => {
+    const fetchData = (i) => {
+      try {
+        const post = { result: result[i] };
+
+        fetch("http://localhost:3001/review", {
+          method: "post", // 통신방법
+          headers: {
+            "content-type": "application/json",
+          }, // API응답 정보 담기
+          body: JSON.stringify(post), //전달 내용
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            console.log(json);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
 
   return (
     <Wrapper>
@@ -153,7 +176,13 @@ const HospitalList = ({ location }) => {
               전화번호
             </Text>
             <Text marginLeft="20" weight="500" size="25">
-              {result[i].phone !== "" ? result[i].phone : "데이터가 없습니다."}
+              {result[i].phone !== "" ? (
+                result[i].phone
+              ) : (
+                <span style={{ color: "${palette.gray}" }}>
+                  데이터가 없습니다.
+                </span>
+              )}
             </Text>
             <Text weight="500" marginTop="10" size="25">
               주소
@@ -180,6 +209,7 @@ const HospitalList = ({ location }) => {
                   color="#1F2933"
                   type="submit"
                   marginTop="1.5rem"
+                  onClick={submitResult}
                 />
               </Link>
             </ButtonBox>

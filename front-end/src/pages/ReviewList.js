@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import User from "../assets/user.png";
 import Play from "../assets/play.png";
+import palette from "../styles/palette";
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,9 +20,10 @@ const Box = styled.div`
   justify-content: ${(props) => props.justifyContent || "center"};
   align-items: center;
   width: 100%;
-  background-color: #1f2933;
+  background-color: ${palette.darkBlack};
   margin-top: ${(props) => props.marginTop || "0px"};
-  height: ${(props) => props.height || "4rem"};
+  min-height: ${(props) => props.height || "4rem"};
+  padding-left: ${(props) => props.paddingLeft || "0rem"};
 `;
 
 const Image = styled.img`
@@ -59,7 +61,7 @@ const ReviewList = ({ location }) => {
       <Box>
         <h2>후기</h2>
       </Box>
-      <Box marginTop="1rem">
+      <Box marginTop="1rem" paddingLeft="1rem">
         <h1>{result[key].hospital_name}</h1>
       </Box>
       <Box

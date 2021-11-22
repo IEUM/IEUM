@@ -9,7 +9,7 @@ const mysql = require("mysql"); // mysql 모듈 사용
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root", //mysql의 id
-  password: "dlsrksro50^^", //mysql의 password
+  password: "dlsrksro50^^",
   database: "ieum", //사용할 데이터베이스
 });
 
@@ -56,6 +56,23 @@ app.post("/keyword", (req, res) => {
       }
     }
   );
+});
+
+app.post("/review", (req, res) => {
+  const result = req.body.result;
+  console.log(result);
+  connection.query("SELECT * FROM review", function (err, rows, fields) {
+    if (err) {
+      console.log("실패");
+      // console.log(err);
+    } else {
+      const sendAllReview = rows.filter((row) => {
+        return row.hospital_name.indexOf() !== -1;
+      });
+      res.send(sendAllReview);
+      console.log(sendAllReview);
+    }
+  });
 });
 
 app.listen(port, () => {

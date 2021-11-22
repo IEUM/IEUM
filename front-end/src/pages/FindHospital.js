@@ -6,6 +6,7 @@ import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
 import Search from "../assets/find.png";
 import Filter from "../assets/filter.png";
+import palette from "../styles/palette";
 
 import Text from "../components/Text";
 import Button from "../components/Button";
@@ -31,7 +32,7 @@ const LocationBox = styled.div`
 const SearchBox = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #1f2933;
+  background-color: ${palette.darkBlack};
   padding-top: 1rem;
   margin-top: 1rem;
 `;
@@ -52,7 +53,8 @@ const Input = styled.input`
   height: 2rem;
   padding-left: 1rem;
   margin-right: 1rem;
-  background-color: #1f2933;
+  background-color: ${palette.darkBlack};
+  font-size: 20px;
 `;
 
 const Menu = styled.div`
@@ -60,7 +62,7 @@ const Menu = styled.div`
   align-items: center;
   flex-wrap: wrap;
   flex-direction: ${(props) => props.direction || "row"};
-  background-color: #1f2933;
+  background-color: ${palette.darkBlack};
   margin-top: 1rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -80,8 +82,8 @@ const Items = styled.div`
   font-size: 28px;
 
   &:hover {
-    background-color: #f6f7fb;
-    color: #1f2933;
+    background-color: ${palette.ivory};
+    color: ${palette.darkBlack};
     border-radius: 5px;
   }
 `;
