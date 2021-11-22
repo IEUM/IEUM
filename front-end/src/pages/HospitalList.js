@@ -5,29 +5,20 @@ import { Link } from "react-router-dom";
 import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
 import palette from "../styles/palette";
+import {
+  Wrapper,
+  Image,
+  Menu,
+  Items,
+  ButtonBox,
+  LocationBox,
+} from "./Presenter/Presenter";
 
 import Button from "../components/Button";
 import Text from "../components/Text";
 import Modal from "../components/Modal";
 
 import cities from "./data/cities";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const LocationBox = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-  margin-left: 0.5rem;
-`;
-
-const Image = styled.img`
-  width: 40px;
-  height: 40px;
-`;
 
 const SearchBox = styled.div`
   display: flex;
@@ -56,38 +47,6 @@ const Card = styled.div`
   border-radius: 10px;
   color: ${(props) => props.color || "white"};
   min-height: ${(props) => props.height || "20rem"};
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Menu = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: ${(props) => props.direction || "row"};
-  background-color: #1f2933;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 1rem;
-  color: ${(props) => props.color || "white"};
-  filter: ${(props) => props.blur || "blur(0)"};
-  height: ${(props) => props.height || "15rem"};
-`;
-
-const Items = styled.div`
-  width: ${(props) => props.width || "10rem"};
-  font-size: 28px;
-
-  &:hover {
-    background-color: ${palette.ivory};
-    color: ${palette.darkBlack};
-    border-radius: 5px;
-  }
 `;
 
 const HospitalList = ({ location }) => {
@@ -125,7 +84,7 @@ const HospitalList = ({ location }) => {
   // };
 
   return (
-    <Wrapper>
+    <Wrapper alignItems="none">
       <LocationBox onClick={openModal}>
         <Image src={Location} />
         <Text marginRight="3">{where}</Text>
@@ -168,7 +127,7 @@ const HospitalList = ({ location }) => {
               {result[i].address}
             </Text>
 
-            <ButtonBox>
+            <ButtonBox alignItems="center">
               <Link
                 to={{
                   pathname: `/reviewList`,
