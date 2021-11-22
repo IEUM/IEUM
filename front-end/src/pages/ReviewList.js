@@ -9,7 +9,7 @@ import User from "../assets/user.png";
 import Play from "../assets/play.png";
 import palette from "../styles/palette";
 
-import { Wrapper, Box } from "./Presenter/Presenter";
+import { Wrapper, Box, TextBox, Row } from "./Presenter/Presenter";
 
 const Image = styled.img`
   width: 40px;
@@ -22,18 +22,8 @@ const ImageBox = styled.div`
   justify-content: space-around;
   height: 6rem;
 `;
-const TextBox = styled.div`
-  display: flex;
-`;
 
 const LikeBox = styled.div``;
-
-const Row = styled.div`
-  display: flex;
-  width: 90%;
-  justify-content: space-around;
-  align-items: center;
-`;
 
 const ReviewList = ({ location }) => {
   const result = location.state.result;

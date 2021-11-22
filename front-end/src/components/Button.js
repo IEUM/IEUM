@@ -8,7 +8,7 @@ const ButtonBox = styled.button`
   font-size: ${(props) => props.fontSize || 2.4}rem;
   height: 2.5rem;
   border-radius: 6px;
-  border-color: ${palette.ivory};
+  border-color: ${(props) => props.borderColor || `${palette.ivory}`};
   outline: none;
   cursor: pointer;
   background-color: ${palette.darkBlack};
@@ -20,6 +20,7 @@ const Button = ({
   height,
   color,
   borderRadius,
+  borderColor,
   marginTop,
   fontSize,
   ...rest
@@ -33,6 +34,7 @@ const Button = ({
           height: height,
           backgroundColor: color,
           borderRadius: borderRadius,
+          borderColor: borderColor,
           marginTop: marginTop,
         }}
         {...rest}
