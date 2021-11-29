@@ -32,12 +32,6 @@ const WriteReview = ({ location }) => {
       body: JSON.stringify(post),
     });
     console.log(post);
-    // .then((res) => res.json())
-    // .then((json) => {
-    //   this.setState({
-    //     testbody: json.text,
-    //   });
-    // });
   };
 
   return (

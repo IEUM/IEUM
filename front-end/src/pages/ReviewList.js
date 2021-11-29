@@ -7,13 +7,9 @@ import { Link } from "react-router-dom";
 
 import User from "../assets/user.png";
 import Play from "../assets/play.png";
+import Thumb from "../assets/thumb.png";
 
-import { Wrapper, Box, TextBox, Row } from "./Presenter/Presenter";
-
-const Image = styled.img`
-  width: 40px;
-  height: 40px;
-`;
+import { Wrapper, Box, TextBox, Row, Image } from "./Presenter/Presenter";
 
 const ImageBox = styled.div`
   display: flex;
@@ -22,14 +18,19 @@ const ImageBox = styled.div`
   height: 6rem;
 `;
 
-const LikeBox = styled.div``;
+const LikeBox = styled.div`
+  display: flex;
+`;
+
+const DateBox = styled.div`
+  width: 10rem;
+`;
 
 const ReviewList = ({ location }) => {
   const result = location.state.result;
   const key = location.state.key;
 
-  const [reviews, setReviews] = useState("");
-  let temp = "";
+  const [reviewsList, setReviewsList] = useState([]);
 
   const submitHospitalId = () => {
     const post = { hospital_id: result[key].hospital_id };
@@ -43,18 +44,16 @@ const ReviewList = ({ location }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        //setReviews(JSON.stringify(json));
-        temp = JSON.parse(JSON.stringify(json));
-        setReviews(temp);
-        //console.log(json);
+        const reviewsList = json.map((c, index) => json[index]);
+        setReviewsList(reviewsList);
+        console.log("list", reviewsList);
+        console.log(json);
       });
   };
 
   useEffect(() => {
     submitHospitalId();
   }, []);
-
-  console.log(reviews);
 
   return (
     <Wrapper>
@@ -64,23 +63,44 @@ const ReviewList = ({ location }) => {
       <Box marginTop="1rem" paddingLeft="1rem">
         <h1>{result[key].hospital_name}</h1>
       </Box>
-      <Box
-        marginTop="1rem"
-        height="10rem"
-        justifyContent="space-around"
-        flexDirection="column"
-      >
-        <Row>
-          <ImageBox>
-            <Image src={User} alt="user" />
-            <Image src={Play} alt="user" />
-          </ImageBox>
-          <TextBox>
-            <Text></Text>
-          </TextBox>
-        </Row>
-        <LikeBox></LikeBox>
-      </Box>
+
+      {reviewsList.map((c, index) => (
+        <Box
+          marginTop="1rem"
+          paddingTop="1rem"
+          paddingBottom="1rem"
+          justifyContent="space-around"
+          flexDirection="column"
+        >
+          <Row>
+            <ImageBox>
+              <Image src={User} alt="user" />
+              <Image src={Play} alt="user" />
+            </ImageBox>
+            <TextBox>
+              <Text key={index} lineHeight="1rem">
+                {c.content}
+              </Text>
+            </TextBox>
+          </Row>
+          <Row marginTop="1rem">
+            <DateBox>
+              {c.review_date ? c.review_date.toString().slice(0, 10) : ""}
+            </DateBox>
+            <LikeBox>
+              <Image src={Thumb} alt="thumbUp" width="30px" height="30px" />
+              <TextBox width="1rem" marginLeft="0.5rem">
+                {c.like_count ? c.like_count : 0}
+              </TextBox>
+              <Image src={Thumb} alt="thumbUp" width="30px" height="30px" />
+              <TextBox width="1rem" marginLeft="0.5rem">
+                {c.dislike_count ? c.dislike_count : 0}
+              </TextBox>
+            </LikeBox>
+          </Row>
+        </Box>
+      ))}
+
       <Link
         to={{
           pathname: `/writeReview`,
@@ -96,6 +116,7 @@ const ReviewList = ({ location }) => {
           height="5rem"
           type="submit"
           marginTop="8rem"
+          marginBottom="2rem"
         />
       </Link>
     </Wrapper>

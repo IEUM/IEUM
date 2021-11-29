@@ -83,17 +83,16 @@ app.post("/write", (req, res) => {
   const hospital_id = req.body.hospital_id;
   const content = req.body.content;
   const today = req.body.today;
-  console.log(hospital_id);
-  console.log(content);
-  console.log(today);
+  // console.log(hospital_id);
+  // console.log(content);
+  // console.log(today);
   connection.query(
-    "insert into review(user_id, hospital_id, content, review_date) values(?,?,?)",
+    "insert into review(user_id, hospital_id, content, review_date) values(?,?,?,?)",
     [1, hospital_id, content, today],
     function (err, rows, fields) {
       if (err) {
         console.log("실패");
       } else {
-        console.log("성공");
         console.log(rows);
       }
     }

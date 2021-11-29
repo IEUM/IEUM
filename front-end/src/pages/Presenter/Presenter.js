@@ -18,10 +18,14 @@ export const Box = styled.div`
   margin-top: ${(props) => props.marginTop || "0px"};
   min-height: ${(props) => props.height || "4rem"};
   padding-left: ${(props) => props.paddingLeft || "0rem"};
+  padding-top: ${(props) => props.paddingTop || "0rem"};
+  padding-bottom: ${(props) => props.paddingBottom || "0rem"}; ;
 `;
 
 export const TextBox = styled.div`
   display: flex;
+  width: ${(props) => props.width || "17rem"};
+  margin-left: ${(props) => props.marginLeft || "0rem"};
 `;
 
 export const Row = styled.div`
@@ -29,11 +33,12 @@ export const Row = styled.div`
   width: 90%;
   justify-content: space-around;
   align-items: center;
+  margin-top: ${(props) => props.marginTop || "0rem"};
 `;
 
 export const Image = styled.img`
-  width: 40px;
-  height: 40px;
+  width: ${(props) => props.width || "40px"};
+  height: ${(props) => props.height || "40px"};
 `;
 
 export const Menu = styled.div`

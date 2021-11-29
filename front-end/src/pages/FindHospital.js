@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -82,6 +82,7 @@ const FindHospital = () => {
           .then((json) => {
             console.log(json);
             setResult(JSON.stringify(json));
+
             console.log(result);
           });
       } catch (error) {
@@ -137,8 +138,8 @@ const FindHospital = () => {
             value={keyword}
             onChange={handleChange}
           />
+          {/* 클릭시 색 바뀌도록 */}
           <Image src={Search} onClick={submitKeyword} />
-          {/* <button type="submit" onClick={submitKeyword} /> */}
         </Row>
         <div
           style={{

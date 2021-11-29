@@ -11,13 +11,17 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
+  //height: 100%;
+  margin-top: 10vh;
+  @media only screen and (max-width: 768px) {
+    margin-top: 0rem;
+  }
 `;
 
 const Items = styled.div`
   display: flex;
   flex-direction: column;
-  width: 24rem;
+  //width: 24rem;
 `;
 
 const LogoBox = styled.div`
