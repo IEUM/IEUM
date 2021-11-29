@@ -6,35 +6,23 @@ import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
 import Search from "../assets/find.png";
 import Filter from "../assets/filter.png";
+import palette from "../styles/palette";
+import {
+  Wrapper,
+  Image,
+  Menu,
+  Items,
+  ButtonBox,
+  LocationBox,
+  SearchBox,
+} from "./Presenter/Presenter";
 
 import Text from "../components/Text";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Image = styled.img`
-  width: 40px;
-  height: 40px;
-`;
-
-const LocationBox = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-  margin-left: 0.5rem;
-`;
-
-const SearchBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #1f2933;
-  padding-top: 1rem;
-  margin-top: 1rem;
-`;
+import cities from "./data/cities";
+import categories from "./data/categories";
 
 const Row = styled.div`
   display: flex;
@@ -52,73 +40,9 @@ const Input = styled.input`
   height: 2rem;
   padding-left: 1rem;
   margin-right: 1rem;
-  background-color: #1f2933;
+  background-color: ${palette.darkBlack};
+  font-size: 20px;
 `;
-
-const Menu = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: ${(props) => props.direction || "row"};
-  background-color: #1f2933;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 1rem;
-  color: ${(props) => props.color || "white"};
-  filter: ${(props) => props.blur || "blur(0)"};
-  height: ${(props) => props.height || "15rem"};
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const Items = styled.div`
-  width: ${(props) => props.width || "10rem"};
-  font-size: 28px;
-
-  &:hover {
-    background-color: #f6f7fb;
-    color: #1f2933;
-    border-radius: 5px;
-  }
-`;
-
-const categories = [
-  { id: 0, text: "전체" },
-  { id: 1, text: "내과" },
-  { id: 2, text: "의과" },
-  { id: 3, text: "이비인후과" },
-  { id: 4, text: "신경외과" },
-  { id: 5, text: "정형외과" },
-  { id: 6, text: "산부인과" },
-  { id: 7, text: "성형외과" },
-  { id: 8, text: "치과" },
-  { id: 9, text: "동물병원" },
-  { id: 10, text: "약국" },
-];
-
-const cities = [
-  { id: 1, text: "서울", cityCode: "110000" },
-  { id: 2, text: "경기", cityCode: "310000" },
-  { id: 3, text: "인천", cityCode: "220000" },
-  { id: 4, text: "강원", cityCode: "320000" },
-  { id: 5, text: "대전", cityCode: "250000" },
-  { id: 6, text: "세종", cityCode: "410000" },
-  { id: 7, text: "충남", cityCode: "340000" },
-  { id: 8, text: "충북", cityCode: "330000" },
-  { id: 9, text: "부산", cityCode: "210000" },
-  { id: 10, text: "울산", cityCode: "260000" },
-  { id: 11, text: "경남", cityCode: "380000" },
-  { id: 12, text: "경북", cityCode: "370000" },
-  { id: 13, text: "대구", cityCode: "230000" },
-  { id: 14, text: "광주", cityCode: "240000" },
-  { id: 15, text: "전남", cityCode: "360000" },
-  { id: 16, text: "전북", cityCode: "350000" },
-  { id: 17, text: "제주", cityCode: "390000" },
-];
 
 const FindHospital = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -126,7 +50,14 @@ const FindHospital = () => {
   const [where, setWhere] = useState("위치설정");
   const [keyword, setKeyword] = useState("");
   const [result, setResult] = useState("");
-  const [isError, setIsError] = useState(false);
+
+  const [address, setAddress] = useState({
+    city: "",
+    gu: "",
+    dong: "",
+  });
+  const [guList, setGuList] = useState([]);
+  const [dongList, setDongList] = useState([]);
 
   const openModal = () => {
     setModalOpen(true);
@@ -142,7 +73,6 @@ const FindHospital = () => {
 
   // input 키워드 보냄
   const submitKeyword = () => {
-    setIsError(false);
     const fetchData = () => {
       try {
         const post = { keyword: keyword };
@@ -156,50 +86,105 @@ const FindHospital = () => {
         })
           .then((res) => res.json())
           .then((json) => {
-            console.log(json);
+            //console.log(json);
             setResult(JSON.stringify(json));
             console.log(result);
           });
       } catch (error) {
-        setIsError(true);
         console.log(error);
       }
     };
     fetchData();
   };
 
-  const onCall = () => {
-    //callbody
-    fetch("http://localhost:3001/keyword", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        setResult(json.hospital_name);
-        console.log(result);
-      });
+  const submitAddress = () => {
+    closeModal();
+    try {
+      const post = { city: address.city, gu: address.gu, dong: address.dong };
+      console.log(post);
+
+      fetch("http://localhost:3001/address", {
+        method: "post", // 통신방법
+        headers: {
+          "content-type": "application/json",
+        }, // API응답 정보 담기
+        body: JSON.stringify(post), //전달 내용
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+          setResult(JSON.stringify(json));
+          console.log(result);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const Find = (hospitals) => {
-    let data = hospitals.filter(
-      (data) => data.hospital_name.indexOf(keyword) > -1
-    );
-    let hospitalList = [];
-    data.map((hospital, i) => hospitalList.push(data[i].hospital_name));
-    console.log(hospitalList);
-    // data.map((hospital, i) => console.log(data[i].hospital_name));
+  const submitCity = () => {
+    try {
+      const post = { city: address.city };
+      console.log(post);
+      fetch("http://localhost:3001/city", {
+        method: "post", // 통신방법
+        headers: {
+          "content-type": "application/json",
+        }, // API응답 정보 담기
+        body: JSON.stringify(post), //전달 내용
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          const guList = json.map((c, index) => json[index]);
+          setGuList(guList);
+          console.log(guList);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    setWhere(data[0].dong + " 외" + hospitalList.length);
-    setKeyword("");
+  const submitGu = () => {
+    try {
+      const post = { gu: address.gu };
+      console.log(post);
+      fetch("http://localhost:3001/gu", {
+        method: "post", // 통신방법
+        headers: {
+          "content-type": "application/json",
+        }, // API응답 정보 담기
+        body: JSON.stringify(post), //전달 내용
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          const dongList = json.map((c, index) => json[index]);
+          setDongList(dongList);
+          console.log(dongList);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onClickCity = (id) => {
+    setAddress({
+      ...address,
+      city: id,
+    });
+    submitCity();
+    console.log(address);
+  };
+
+  const onClickGu = (id) => {
+    setAddress({
+      ...address,
+      gu: id,
+    });
+    submitGu();
+    console.log(address);
   };
 
   return (
-    <Wrapper>
+    <Wrapper alignItems="none">
       <LocationBox onClick={openModal}>
         <Image src={Location} />
         <Text marginRight="3">{where}</Text>
@@ -213,8 +198,7 @@ const FindHospital = () => {
             value={keyword}
             onChange={handleChange}
           />
-          <Image src={Search} onClick={submitKeyword} />
-          {/* <button type="submit" onClick={submitKeyword} /> */}
+          <Image background="#9BA5B1" src={Search} onClick={submitKeyword} />
         </Row>
         <div
           style={{
@@ -241,7 +225,7 @@ const FindHospital = () => {
           ))}
         </Menu>
       ) : (
-        <Menu direction="column">
+        <Menu direction="column" height="12rem">
           {categories.map((c) => (
             <Items key={c.id}>{c.text}</Items>
           ))}
@@ -268,17 +252,46 @@ const FindHospital = () => {
         </ButtonBox>
       </Link>
 
-      <Modal open={modalOpen} close={closeModal} header="Modal heading">
+      <Modal
+        open={modalOpen}
+        close={closeModal}
+        submitAddress={submitAddress}
+        header="Modal heading"
+      >
         <Wrapper>
           <Menu>
             {cities.map((c) => (
-              <Items width="5rem" key={c.id}>
+              <Items
+                width="5rem"
+                key={c.id}
+                onClick={() => onClickCity(c.cityCode)}
+              >
                 {c.text}
               </Items>
             ))}
           </Menu>
-          <Menu height="10rem"></Menu>
-          <Menu height="10rem"></Menu>
+          <Menu overflow="scroll" height="9rem">
+            {guList.map((c, index) => (
+              <Items key={c} onClick={() => onClickGu(c.temp_gu)}>
+                {c.temp_gu}
+              </Items>
+            ))}
+          </Menu>
+          <Menu overflow="scroll" height="9rem">
+            {dongList.map((c, index) => (
+              <Items
+                key={c}
+                onClick={() =>
+                  setAddress({
+                    ...address,
+                    dong: c.temp_dong,
+                  })
+                }
+              >
+                {c.temp_dong}
+              </Items>
+            ))}
+          </Menu>
         </Wrapper>
       </Modal>
     </Wrapper>

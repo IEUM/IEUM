@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
+import palette from "../styles/palette";
 
 import Text from "../components/Text";
 import Button from "../components/Button";
@@ -31,7 +32,7 @@ const Row = styled.div`
 `;
 
 const Menu = styled.div`
-  background-color: #1f2933;
+  background-color: ${palette.darkBlack};
   margin-top: 1rem;
   height: 20rem;
 `;
