@@ -3,7 +3,11 @@ import Textarea from "../components/Textarea";
 import Button from "../components/Button";
 import Text from "../components/Text";
 
+import { Link } from "react-router-dom";
 import { Wrapper, Box, Row } from "./Presenter/Presenter";
+
+// import { setCookies } from "../cookies/cookies";
+// import { getCookie } from "../cookies/cookies";
 
 const WriteReview = ({ location }) => {
   const result = location.state.result;
@@ -79,14 +83,20 @@ const WriteReview = ({ location }) => {
             fontSize="1.6"
             onClick={() => submitContent()}
           />
-          <Button
-            name="취소"
-            width="5rem"
-            height="3rem"
-            type="submit"
-            marginTop="3rem"
-            fontSize="1.6"
-          />
+          <Link
+            to={{
+              pathname: `/reviewList`,
+            }}
+          >
+            <Button
+              name="취소"
+              width="5rem"
+              height="3rem"
+              type="submit"
+              marginTop="3rem"
+              fontSize="1.6"
+            />
+          </Link>
         </Row>
       </Box>
     </Wrapper>

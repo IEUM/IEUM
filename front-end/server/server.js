@@ -5,6 +5,7 @@ const port = 3001; // react의 기본값은 3000이니까 3000이 아닌 아무 
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mysql = require("mysql"); // mysql 모듈 사용
+//const cookieParser = require("cookie-parser");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -22,6 +23,7 @@ connection.connect(function (err) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+//app.use(cookieParser()); //request, response부분에서 사용 가능
 
 // 공식: app.통신방법("/통신할 주소", (req, res)....
 // req(요청): 앞에서 보낸 객체를 받아 body가 앞에서 보낸 데이터
@@ -58,6 +60,58 @@ app.post("/keyword", (req, res) => {
   );
 });
 
+app.post("/city", (req, res) => {
+  const city = req.body.city;
+  console.log(city);
+  connection.query(
+    "SELECT distinct temp_gu FROM hospital WHERE city_code =" +
+      city +
+      " order by temp_gu",
+    function (err, rows, fields) {
+      if (err) {
+        console.log("실패");
+      } else {
+        res.send(rows);
+      }
+    }
+  );
+});
+
+app.post("/gu", (req, res) => {
+  const gu = req.body.gu;
+  console.log(gu);
+  connection.query(
+    "SELECT distinct temp_dong FROM hospital WHERE temp_gu ='" +
+      gu +
+      "' and temp_dong <> '' order by temp_dong",
+    function (err, rows, fields) {
+      if (err) {
+        console.log("실패");
+      } else {
+        res.send(rows);
+        console.log(rows);
+      }
+    }
+  );
+});
+
+app.post("/address", (req, res) => {
+  const city = req.body.city;
+  const gu = req.body.gu;
+  const dong = req.body.dong;
+  console.log(city, gu, dong);
+  // connection.query(
+  //   "SELECT * FROM hospital WHERE city_code =" + city,
+  //   function (err, rows, fields) {
+  //     if (err) {
+  //       console.log("실패");
+  //     } else {
+  //       res.send(rows);
+  //     }
+  //   }
+  // );
+});
+
 app.post("/review", (req, res) => {
   const hospital_id = req.body.hospital_id;
   console.log(hospital_id);
@@ -80,6 +134,8 @@ app.post("/review", (req, res) => {
 });
 
 app.post("/write", (req, res) => {
+  res.cookie("cookie", "cookie");
+  console.log(req.cookies);
   const hospital_id = req.body.hospital_id;
   const content = req.body.content;
   const today = req.body.today;

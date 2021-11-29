@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -50,7 +50,14 @@ const FindHospital = () => {
   const [where, setWhere] = useState("위치설정");
   const [keyword, setKeyword] = useState("");
   const [result, setResult] = useState("");
-  const [isError, setIsError] = useState(false);
+
+  const [address, setAddress] = useState({
+    city: "",
+    gu: "",
+    dong: "",
+  });
+  const [guList, setGuList] = useState([]);
+  const [dongList, setDongList] = useState([]);
 
   const openModal = () => {
     setModalOpen(true);
@@ -66,7 +73,6 @@ const FindHospital = () => {
 
   // input 키워드 보냄
   const submitKeyword = () => {
-    setIsError(false);
     const fetchData = () => {
       try {
         const post = { keyword: keyword };
@@ -82,46 +88,98 @@ const FindHospital = () => {
           .then((json) => {
             console.log(json);
             setResult(JSON.stringify(json));
-
             console.log(result);
           });
       } catch (error) {
-        setIsError(true);
         console.log(error);
       }
     };
     fetchData();
   };
 
-  // const onCall = () => {
-  //   //callbody
-  //   fetch("http://localhost:3001/keyword", {
-  //     method: "post",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((json) => {
-  //       console.log(json);
-  //       setResult(json.hospital_name);
-  //       console.log(result);
-  //     });
-  // };
+  const submitAddress = () => {
+    closeModal();
+    try {
+      const post = { city: address.city, gu: address.gu, dong: address.dong };
+      console.log(post);
 
-  // const Find = (hospitals) => {
-  //   let data = hospitals.filter(
-  //     (data) => data.hospital_name.indexOf(keyword) > -1
-  //   );
-  //   let hospitalList = [];
-  //   data.map((hospital, i) => hospitalList.push(data[i].hospital_name));
-  //   console.log(hospitalList);
-  //   // data.map((hospital, i) => console.log(data[i].hospital_name));
+      fetch("http://localhost:3001/address", {
+        method: "post", // 통신방법
+        headers: {
+          "content-type": "application/json",
+        }, // API응답 정보 담기
+        body: JSON.stringify(post), //전달 내용
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //   setWhere(data[0].dong + " 외" + hospitalList.length);
-  //   setKeyword("");
-  // };
+  const submitCity = () => {
+    try {
+      const post = { city: address.city };
+      console.log(post);
+      fetch("http://localhost:3001/city", {
+        method: "post", // 통신방법
+        headers: {
+          "content-type": "application/json",
+        }, // API응답 정보 담기
+        body: JSON.stringify(post), //전달 내용
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          const guList = json.map((c, index) => json[index]);
+          setGuList(guList);
+          console.log(guList);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const submitGu = () => {
+    try {
+      const post = { gu: address.gu };
+      console.log(post);
+      fetch("http://localhost:3001/gu", {
+        method: "post", // 통신방법
+        headers: {
+          "content-type": "application/json",
+        }, // API응답 정보 담기
+        body: JSON.stringify(post), //전달 내용
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          const dongList = json.map((c, index) => json[index]);
+          setDongList(dongList);
+          console.log(dongList);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onClickCity = (id) => {
+    setAddress({
+      ...address,
+      city: id,
+    });
+    submitCity();
+    console.log(address);
+  };
+
+  const onClickGu = (id) => {
+    setAddress({
+      ...address,
+      gu: id,
+    });
+    submitGu();
+    console.log(address);
+  };
 
   return (
     <Wrapper alignItems="none">
@@ -138,8 +196,7 @@ const FindHospital = () => {
             value={keyword}
             onChange={handleChange}
           />
-          {/* 클릭시 색 바뀌도록 */}
-          <Image src={Search} onClick={submitKeyword} />
+          <Image background="#9BA5B1" src={Search} onClick={submitKeyword} />
         </Row>
         <div
           style={{
@@ -160,13 +217,14 @@ const FindHospital = () => {
           color="rgba(255, 255, 255, 0.1)"
           blur="blur(1.7px)"
           direction="column"
+          height="12rem"
         >
           {categories.map((c) => (
             <Items key={c.id}>{c.text}</Items>
           ))}
         </Menu>
       ) : (
-        <Menu direction="column">
+        <Menu direction="column" height="12rem">
           {categories.map((c) => (
             <Items key={c.id}>{c.text}</Items>
           ))}
@@ -193,17 +251,46 @@ const FindHospital = () => {
         </ButtonBox>
       </Link>
 
-      <Modal open={modalOpen} close={closeModal} header="Modal heading">
+      <Modal
+        open={modalOpen}
+        close={closeModal}
+        submitAddress={submitAddress}
+        header="Modal heading"
+      >
         <Wrapper>
           <Menu>
             {cities.map((c) => (
-              <Items width="5rem" key={c.id}>
+              <Items
+                width="5rem"
+                key={c.id}
+                onClick={() => onClickCity(c.cityCode)}
+              >
                 {c.text}
               </Items>
             ))}
           </Menu>
-          <Menu height="10rem"></Menu>
-          <Menu height="10rem"></Menu>
+          <Menu overflow="scroll" height="9rem">
+            {guList.map((c, index) => (
+              <Items key={c} onClick={() => onClickGu(c.temp_gu)}>
+                {c.temp_gu}
+              </Items>
+            ))}
+          </Menu>
+          <Menu overflow="scroll" height="9rem">
+            {dongList.map((c, index) => (
+              <Items
+                key={c}
+                onClick={() =>
+                  setAddress({
+                    ...address,
+                    dong: c.temp_dong,
+                  })
+                }
+              >
+                {c.temp_dong}
+              </Items>
+            ))}
+          </Menu>
         </Wrapper>
       </Modal>
     </Wrapper>

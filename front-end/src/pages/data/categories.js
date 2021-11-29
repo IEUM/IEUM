@@ -8,8 +8,6 @@ const categories = [
   { id: 6, text: "산부인과" },
   { id: 7, text: "성형외과" },
   { id: 8, text: "치과" },
-  { id: 9, text: "동물병원" },
-  { id: 10, text: "약국" },
 ];
 
 export default categories;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -63,25 +63,6 @@ const HospitalList = ({ location }) => {
 
   const where = location.state.where;
   const result = JSON.parse(location.state.result);
-
-  // const [reviews, setReviews] = useState("");
-  // const submitHospitalId = (key) => {
-  //   const post = { hospital_id: result[key].hospital_id };
-
-  //   fetch("http://localhost:3001/review", {
-  //     method: "post", // 통신방법
-  //     headers: {
-  //       "content-type": "application/json",
-  //     }, // API응답 정보 담기
-  //     body: JSON.stringify(post), //전달 내용
-  //   })
-  //     .then((res) => res.json())
-  //     .then((json) => {
-  //       setReviews(JSON.stringify(json));
-  //       //temp = JSON.stringify(json);
-  //       //setReviews(temp);
-  //     });
-  // };
 
   return (
     <Wrapper alignItems="none">

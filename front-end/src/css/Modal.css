@@ -20,11 +20,10 @@
   box-shadow: 10px 0px 15px black;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
-  overflow: hidden;
+  overflow-y: scroll;
 }
 .modal > section > header {
   position: relative;
-  /* padding: 16px 64px 16px 16px; */
   background-color: #3e4c59;
   font-weight: 700;
 }

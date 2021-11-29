@@ -88,7 +88,13 @@ const ReviewList = ({ location }) => {
               {c.review_date ? c.review_date.toString().slice(0, 10) : ""}
             </DateBox>
             <LikeBox>
-              <Image src={Thumb} alt="thumbUp" width="30px" height="30px" />
+              <Image
+                src={Thumb}
+                alt="thumbUp"
+                width="30px"
+                height="30px"
+                transform="rotate(180deg)"
+              />
               <TextBox width="1rem" marginLeft="0.5rem">
                 {c.like_count ? c.like_count : 0}
               </TextBox>

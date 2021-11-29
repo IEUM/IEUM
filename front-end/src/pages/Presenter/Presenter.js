@@ -39,6 +39,10 @@ export const Row = styled.div`
 export const Image = styled.img`
   width: ${(props) => props.width || "40px"};
   height: ${(props) => props.height || "40px"};
+  transform: ${(props) => props.transform || ""};
+  &:active {
+    background-color: ${(props) => props.background || ""};
+  }
 `;
 
 export const Menu = styled.div`
@@ -52,7 +56,8 @@ export const Menu = styled.div`
   padding: 1rem 0rem 1rem 1rem;
   color: ${(props) => props.color || "white"};
   filter: ${(props) => props.blur || "blur(0)"};
-  height: ${(props) => props.height || "15rem"};
+  height: ${(props) => props.height || "14rem"};
+  overflow-y: ${(props) => props.overflow || ""};
 `;
 
 export const Items = styled.div`
