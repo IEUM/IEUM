@@ -100,16 +100,22 @@ app.post("/address", (req, res) => {
   const gu = req.body.gu;
   const dong = req.body.dong;
   console.log(city, gu, dong);
-  // connection.query(
-  //   "SELECT * FROM hospital WHERE city_code =" + city,
-  //   function (err, rows, fields) {
-  //     if (err) {
-  //       console.log("실패");
-  //     } else {
-  //       res.send(rows);
-  //     }
-  //   }
-  // );
+  connection.query(
+    "select * from hospital where city_code='" +
+      city +
+      "' and temp_gu='" +
+      gu +
+      "' and temp_dong='" +
+      dong +
+      "' limit 10",
+    function (err, rows, fields) {
+      if (err) {
+        console.log("실패");
+      } else {
+        res.send(rows);
+      }
+    }
+  );
 });
 
 app.post("/review", (req, res) => {

@@ -86,7 +86,7 @@ const FindHospital = () => {
         })
           .then((res) => res.json())
           .then((json) => {
-            console.log(json);
+            //console.log(json);
             setResult(JSON.stringify(json));
             console.log(result);
           });
@@ -113,6 +113,8 @@ const FindHospital = () => {
         .then((res) => res.json())
         .then((json) => {
           console.log(json);
+          setResult(JSON.stringify(json));
+          console.log(result);
         });
     } catch (error) {
       console.log(error);
