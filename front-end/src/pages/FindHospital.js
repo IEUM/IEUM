@@ -219,13 +219,14 @@ const FindHospital = () => {
           color="rgba(255, 255, 255, 0.1)"
           blur="blur(1.7px)"
           direction="column"
+          height="15rem"
         >
           {categories.map((c) => (
             <Items key={c.id}>{c.text}</Items>
           ))}
         </Menu>
       ) : (
-        <Menu direction="column" height="12rem">
+        <Menu direction="column" height="15rem">
           {categories.map((c) => (
             <Items key={c.id}>{c.text}</Items>
           ))}
