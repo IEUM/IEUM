@@ -23,7 +23,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const MapBox = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 56vh;
 `;
 
 const Card = styled.div`
