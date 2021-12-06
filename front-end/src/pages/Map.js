@@ -15,13 +15,28 @@ import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
 import Text from "../components/Text";
 import Button from "../components/Button";
+import palette from "../styles/palette";
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const MapBox = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 60vh;
 `;
 
-//const { kakao } = window;
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: ${palette.darkBlack};
+  margin: 1rem 1rem 0rem 1rem;
+  border-radius: 10px;
+  color: ${(props) => props.color || "white"};
+  height: 12rem;
+`;
+
+const { kakao } = window;
 
 const Map = ({ location }) => {
   const where = location.state.where;
@@ -54,7 +69,7 @@ const Map = ({ location }) => {
       });
 
       // 마커에 표시할 인포윈도우를 생성합니다
-      let iwContent = "<div>{el.hospital_name}안녕</div>",
+      let iwContent = el.hospital_name,
         iwRemoveable = true;
 
       const infowindow = new kakao.maps.InfoWindow({
@@ -91,6 +106,16 @@ const Map = ({ location }) => {
     }
   };
 
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    autoplay: false, //자동으로 넘김
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+  };
+
   return (
     <Wrapper alignItems="none">
       <LocationBox>
@@ -101,7 +126,6 @@ const Map = ({ location }) => {
       <HospitalListSearchBox>
         <HospitalListRow>
           <Text size="24px">{result.length} 개의 결과</Text>
-
           <Button
             name="지도 닫기"
             fontSize="1.5"
@@ -113,6 +137,25 @@ const Map = ({ location }) => {
         </HospitalListRow>
       </HospitalListSearchBox>
       <MapBox id="map" />
+      <Slider {...settings}>
+        {result.map((hospital, i) => (
+          <Card key={result[i].hospital_id}>
+            <h1>{result[i].hospital_name}</h1>
+            <Text marginLeft="20" weight="500" size="25">
+              {result[i].phone !== "" ? (
+                result[i].phone
+              ) : (
+                <span style={{ color: `${palette.gray}` }}>
+                  데이터가 없습니다.
+                </span>
+              )}
+            </Text>
+            <Text marginLeft="20" weight="500" size="25">
+              {result[i].address}
+            </Text>
+          </Card>
+        ))}
+      </Slider>
     </Wrapper>
   );
 };
