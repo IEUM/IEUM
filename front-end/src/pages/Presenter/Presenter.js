@@ -91,3 +91,19 @@ export const SearchBox = styled.div`
   padding-top: 1rem;
   margin-top: 1rem;
 `;
+
+export const HospitalListSearchBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px ${palette.white} solid;
+  width: 90%;
+  padding: 1.3rem 0.3rem 0.5rem 0.3rem;
+  margin: 0 auto;
+`;
+
+export const HospitalListRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;

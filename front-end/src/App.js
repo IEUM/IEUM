@@ -7,6 +7,7 @@ import HospitalList from "./pages/HospitalList";
 import Page0 from "./pages/page0";
 import ReviewList from "./pages/ReviewList";
 import WriteReview from "./pages/WriteReview";
+import Map from "./pages/Map";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/page0" component={Page0} />
         <Route exact path="/reviewList" component={ReviewList} />
         <Route exact path="/writeReview" component={WriteReview} />
+        <Route exact path="/map" component={Map} />
       </Switch>
     </Router>
   );

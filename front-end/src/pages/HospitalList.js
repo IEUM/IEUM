@@ -12,6 +12,8 @@ import {
   Items,
   ButtonBox,
   LocationBox,
+  HospitalListSearchBox,
+  HospitalListRow,
 } from "./Presenter/Presenter";
 
 import Button from "../components/Button";
@@ -19,22 +21,6 @@ import Text from "../components/Text";
 import Modal from "../components/Modal";
 
 import cities from "./data/cities";
-
-const SearchBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-bottom: 2px ${palette.white} solid;
-  width: 90%;
-  padding: 1.3rem 0.3rem 0.5rem 0.3rem;
-  margin: 0 auto;
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
 
 const Card = styled.div`
   display: flex;
@@ -71,19 +57,29 @@ const HospitalList = ({ location }) => {
         <Text marginRight="3">{where}</Text>
         <Image src={ArrowBack} />
       </LocationBox>
-      <SearchBox>
-        <Row>
+      <HospitalListSearchBox>
+        <HospitalListRow>
           <Text size="24px">{result.length} 개의 결과</Text>
-          <Button
-            name="지도 보기"
-            fontSize="1.5"
-            width="10rem"
-            height="2.5rem"
-            type="submit"
-            marginTop="0rem"
-          />
-        </Row>
-      </SearchBox>
+          <Link
+            to={{
+              pathname: `/map`,
+              state: {
+                result: result,
+                where: where,
+              },
+            }}
+          >
+            <Button
+              name="지도 보기"
+              fontSize="1.5"
+              width="10rem"
+              height="2.5rem"
+              type="submit"
+              marginTop="0rem"
+            />
+          </Link>
+        </HospitalListRow>
+      </HospitalListSearchBox>
 
       <>
         {result.map((hospital, i) => (
