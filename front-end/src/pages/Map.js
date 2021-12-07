@@ -137,25 +137,27 @@ const Map = ({ location }) => {
         </HospitalListRow>
       </HospitalListSearchBox>
       <MapBox id="map" />
-      <Slider {...settings}>
-        {result.map((hospital, i) => (
-          <Card key={result[i].hospital_id}>
-            <h1>{result[i].hospital_name}</h1>
-            <Text marginLeft="20" weight="500" size="25">
-              {result[i].phone !== "" ? (
-                result[i].phone
-              ) : (
-                <span style={{ color: `${palette.gray}` }}>
-                  데이터가 없습니다.
-                </span>
-              )}
-            </Text>
-            <Text marginLeft="20" weight="500" size="25">
-              {result[i].address}
-            </Text>
-          </Card>
-        ))}
-      </Slider>
+      <div style={{ width: "95%" }}>
+        <Slider {...settings}>
+          {result.map((hospital, i) => (
+            <Card key={result[i].hospital_id}>
+              <h1>{result[i].hospital_name}</h1>
+              <Text marginLeft="20" weight="500" size="25">
+                {result[i].phone !== "" ? (
+                  result[i].phone
+                ) : (
+                  <span style={{ color: `${palette.gray}` }}>
+                    데이터가 없습니다.
+                  </span>
+                )}
+              </Text>
+              <Text marginLeft="20" weight="500" size="25">
+                {result[i].address}
+              </Text>
+            </Card>
+          ))}
+        </Slider>
+      </div>
     </Wrapper>
   );
 };

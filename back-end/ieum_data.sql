@@ -76,6 +76,7 @@ select hospital_name, categories from hospital limit 100;
 select hospital_name, categories from hospital 
 WHERE categories is null;
 
+select distinct categories from hospital;
 UPDATE hospital SET categories = "내과"
 WHERE hospital_name like "%내과%";
 UPDATE hospital SET categories = "외과"

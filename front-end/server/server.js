@@ -134,7 +134,7 @@ app.post("/address", (req, res) => {
       gu +
       "' and temp_dong='" +
       dong +
-      "' limit 10",
+      "' limit 100",
     function (err, rows, fields) {
       if (err) {
         console.log("실패");

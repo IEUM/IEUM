@@ -187,7 +187,7 @@ const FindHospital = () => {
         .then((json) => {
           console.log(json);
           setResult(JSON.stringify(json));
-          console.log(result);
+          console.log("result", result);
         });
     } catch (error) {
       console.log(error);
