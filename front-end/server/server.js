@@ -44,7 +44,7 @@ app.post("/keyword", (req, res) => {
   connection.query(
     "SELECT * FROM hospital WHERE hospital_name LIKE '%" +
       keyword +
-      "%' LIMIT 100",
+      "%' LIMIT 1000",
     function (err, rows, fields) {
       if (err) {
         console.log("실패");
@@ -55,6 +55,33 @@ app.post("/keyword", (req, res) => {
         });
         res.send(sendAllReview);
         console.log(sendAllReview);
+      }
+    }
+  );
+});
+
+app.post("/category", (req, res) => {
+  const category = req.body.category;
+  const city = req.body.city;
+  const gu = req.body.gu;
+  const dong = req.body.dong;
+  console.log(city, gu, dong, category);
+  connection.query(
+    "select * from hospital where city_code='" +
+      city +
+      "' and temp_gu='" +
+      gu +
+      "' and temp_dong='" +
+      dong +
+      "' and categories='" +
+      category +
+      "'",
+    function (err, rows, fields) {
+      if (err) {
+        console.log("실패");
+      } else {
+        res.send(rows);
+        console.log(rows);
       }
     }
   );

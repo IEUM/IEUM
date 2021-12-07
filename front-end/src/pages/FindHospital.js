@@ -55,6 +55,7 @@ const FindHospital = () => {
     city: "",
     gu: "",
     dong: "",
+    category: "",
   });
   const [guList, setGuList] = useState([]);
   const [dongList, setDongList] = useState([]);
@@ -165,6 +166,34 @@ const FindHospital = () => {
     }
   };
 
+  const submitCategory = () => {
+    try {
+      const post = {
+        city: address.city,
+        gu: address.gu,
+        dong: address.dong,
+        category: address.category,
+      };
+      console.log(post);
+
+      fetch("http://localhost:3001/category", {
+        method: "post", // 통신방법
+        headers: {
+          "content-type": "application/json",
+        }, // API응답 정보 담기
+        body: JSON.stringify(post), //전달 내용
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+          setResult(JSON.stringify(json));
+          console.log(result);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onClickCity = (id) => {
     setAddress({
       ...address,
@@ -214,24 +243,36 @@ const FindHospital = () => {
         <Image src={Filter} />
         <Text size="24">필터</Text>
       </LocationBox>
+
       {show ? (
         <Menu
           color="rgba(255, 255, 255, 0.1)"
           blur="blur(1.7px)"
           direction="column"
-          height="15rem"
+          height="20rem"
         >
           {categories.map((c) => (
             <Items key={c.id}>{c.text}</Items>
           ))}
         </Menu>
       ) : (
-        <Menu direction="column" height="15rem">
-          {categories.map((c) => (
-            <Items key={c.id}>{c.text}</Items>
+        <Menu direction="column" height="20rem">
+          {categories.map((c, index) => (
+            <Items
+              key={c.id}
+              onClick={() =>
+                setAddress({
+                  ...address,
+                  category: c.text,
+                })
+              }
+            >
+              {c.text}
+            </Items>
           ))}
         </Menu>
       )}
+
       <Link
         to={{
           pathname: `/hospitalList`,
@@ -249,6 +290,7 @@ const FindHospital = () => {
             color="#1F2933"
             type="submit"
             marginTop="8rem"
+            onClick={() => submitCategory()}
           />
         </ButtonBox>
       </Link>
