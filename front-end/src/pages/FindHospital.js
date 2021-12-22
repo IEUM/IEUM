@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { SERVER } from "../config";
 
 import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
@@ -79,7 +80,7 @@ const FindHospital = () => {
       try {
         const post = { keyword: keyword };
 
-        fetch("http://localhost:3001/keyword", {
+        fetch(`${SERVER}/keyword`, {
           method: "post", // 통신방법
           headers: {
             "content-type": "application/json",
@@ -105,7 +106,7 @@ const FindHospital = () => {
       const post = { city: address.city, gu: address.gu, dong: address.dong };
       console.log(post);
 
-      fetch("http://localhost:3001/address", {
+      fetch(`${SERVER}/address`, {
         method: "post", // 통신방법
         headers: {
           "content-type": "application/json",
@@ -127,7 +128,7 @@ const FindHospital = () => {
     try {
       const post = { city: address.city };
       console.log(post);
-      fetch("http://localhost:3001/city", {
+      fetch(`${SERVER}/city`, {
         method: "post", // 통신방법
         headers: {
           "content-type": "application/json",
@@ -149,7 +150,7 @@ const FindHospital = () => {
     try {
       const post = { gu: address.gu };
       console.log(post);
-      fetch("http://localhost:3001/gu", {
+      fetch(`${SERVER}/gu`, {
         method: "post", // 통신방법
         headers: {
           "content-type": "application/json",
@@ -177,7 +178,7 @@ const FindHospital = () => {
   //     };
   //     console.log(post);
 
-  //     fetch("http://localhost:3001/category", {
+  //     fetch(`${SERVER}/category`, {
   //       method: "post", // 통신방법
   //       headers: {
   //         "content-type": "application/json",

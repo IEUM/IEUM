@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { SERVER } from "../config";
 import styled from "styled-components";
 import Button from "../components/Button";
 import Text from "../components/Text";
@@ -35,7 +36,7 @@ const ReviewList = ({ location }) => {
   const submitHospitalId = () => {
     const post = { hospital_id: result[key].hospital_id };
 
-    fetch("http://localhost:3001/review", {
+    fetch(`${SERVER}/review`, {
       method: "post", // 통신방법
       headers: {
         "content-type": "application/json",

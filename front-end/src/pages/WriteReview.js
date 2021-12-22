@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { SERVER } from "../config";
 import Textarea from "../components/Textarea";
 import Button from "../components/Button";
 import Text from "../components/Text";
@@ -28,7 +29,7 @@ const WriteReview = ({ location }) => {
       today: dateString,
     };
 
-    fetch("http://localhost:3001/write", {
+    fetch(`${SERVER}/write`, {
       method: "post",
       headers: {
         "content-type": "application/json",
