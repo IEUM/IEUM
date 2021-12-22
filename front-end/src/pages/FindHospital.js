@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { SERVER } from "../config";
 
 import Location from "../assets/location.png";
@@ -46,7 +46,7 @@ const Input = styled.input`
 `;
 
 const FindHospital = () => {
-  //const history = useHistory();
+  const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   const [show, setShow] = useState(true);
   const [where, setWhere] = useState("위치설정");
@@ -89,8 +89,8 @@ const FindHospital = () => {
         })
           .then((res) => res.json())
           .then((json) => {
-            //console.log(json);
-            setResult(JSON.stringify(json));
+            //setResult(JSON.stringify(json));
+            setResult(json);
             console.log(result);
           });
       } catch (error) {
