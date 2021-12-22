@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { SERVER } from "../config";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+
 import Textarea from "../components/Textarea";
 import Button from "../components/Button";
 import Text from "../components/Text";
@@ -22,6 +26,17 @@ const WriteReview = ({ location }) => {
 
   const [content, setContent] = useState("");
 
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
+
   const submitContent = () => {
     const post = {
       content: content,
@@ -43,8 +58,13 @@ const WriteReview = ({ location }) => {
     <Wrapper>
       <Box>
         <h2>글쓰기</h2>
+        <p>Microphone: {listening ? "on" : "off"}</p>
+        <button onClick={SpeechRecognition.startListening}>Start</button>
+        <button onClick={SpeechRecognition.stopListening}>Stop</button>
+        <button onClick={resetTranscript}>Reset</button>
+        <p>{transcript}</p>
       </Box>
-      <Textarea onChange={(e) => setContent(e.target.value)} />
+      <Textarea onChange={(e) => setContent(e.target.value)}></Textarea>
       <Box flexDirection="column" marginTop="1rem" backgroundColor="none">
         <Box
           backgroundColor="none"
