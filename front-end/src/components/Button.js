@@ -24,6 +24,7 @@ const Button = ({
   marginTop,
   marginBottom,
   fontSize,
+  fontColor,
   ...rest
 }) => {
   return (
@@ -38,6 +39,7 @@ const Button = ({
           borderColor: borderColor,
           marginTop: marginTop,
           marginBottom: marginBottom,
+          fontColor: fontColor,
         }}
         {...rest}
       >

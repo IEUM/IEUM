@@ -209,7 +209,6 @@ const FindHospital = () => {
             value={keyword}
             onChange={handleChange}
           />
-
           <Image background="#9BA5B1" src={Search} onClick={submitKeyword} />
         </Row>
         <div
@@ -256,27 +255,42 @@ const FindHospital = () => {
           ))}
         </Menu>
       )}
-
-      <Link
-        to={{
-          pathname: `/hospitalList`,
-          state: {
-            where: where,
-            result: result,
-          },
-        }}
-      >
+      {result === "" ? (
         <ButtonBox>
           <Button
             name="검색하기"
-            width="20rem"
-            height="5rem"
-            color="#1F2933"
             type="submit"
-            marginTop="8rem"
+            style={{
+              color: "rgba(255, 255, 255, 0.1)",
+              width: "20rem",
+              height: "5rem",
+              filter: "blur(1.2px)",
+              marginTop: "8rem",
+            }}
           />
         </ButtonBox>
-      </Link>
+      ) : (
+        <ButtonBox>
+          <Link
+            to={{
+              pathname: `/hospitalList`,
+              state: {
+                where: where,
+                result: result,
+              },
+            }}
+          >
+            <Button
+              name="검색하기"
+              width="20rem"
+              height="5rem"
+              color="#1F2933"
+              type="submit"
+              marginTop="8rem"
+            />
+          </Link>
+        </ButtonBox>
+      )}
 
       <Modal
         open={modalOpen}
