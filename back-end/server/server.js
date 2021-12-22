@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-const port = 3001; // react의 기본값은 3000이니까 3000이 아닌 아무 수
+const port = process.env.PORT || 3001;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mysql = require("mysql"); // mysql 모듈 사용
@@ -10,7 +10,7 @@ const mysql = require("mysql"); // mysql 모듈 사용
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root", //mysql의 id
-  password: "dlsrksro50^^",
+  password: "mysql1234",
   database: "ieum", //사용할 데이터베이스
 });
 
@@ -59,33 +59,6 @@ app.post("/keyword", (req, res) => {
     }
   );
 });
-
-// app.post("/category", (req, res) => {
-//   const category = req.body.category;
-//   const city = req.body.city;
-//   const gu = req.body.gu;
-//   const dong = req.body.dong;
-//   console.log(city, gu, dong, category);
-//   connection.query(
-//     "select * from hospital where city_code='" +
-//       city +
-//       "' and temp_gu='" +
-//       gu +
-//       "' and temp_dong='" +
-//       dong +
-//       "' and categories='" +
-//       category +
-//       "'",
-//     function (err, rows, fields) {
-//       if (err) {
-//         console.log("실패");
-//       } else {
-//         res.send(rows);
-//         console.log(rows);
-//       }
-//     }
-//   );
-// });
 
 app.post("/city", (req, res) => {
   const city = req.body.city;
