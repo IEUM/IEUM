@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -50,6 +50,7 @@ const FindHospital = () => {
   const [where, setWhere] = useState("위치설정");
   const [keyword, setKeyword] = useState("");
   const [result, setResult] = useState("");
+  const [dummy, setDummy] = useState(0);
 
   const [address, setAddress] = useState({
     city: "",
@@ -166,33 +167,39 @@ const FindHospital = () => {
     }
   };
 
-  const submitCategory = () => {
-    try {
-      const post = {
-        city: address.city,
-        gu: address.gu,
-        dong: address.dong,
-        category: address.category,
-      };
-      console.log(post);
+  // const submitCategory = () => {
+  //   try {
+  //     const post = {
+  //       city: address.city,
+  //       gu: address.gu,
+  //       dong: address.dong,
+  //       category: address.category,
+  //     };
+  //     console.log(post);
 
-      fetch("http://localhost:3001/category", {
-        method: "post", // 통신방법
-        headers: {
-          "content-type": "application/json",
-        }, // API응답 정보 담기
-        body: JSON.stringify(post), //전달 내용
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json);
-          setResult(JSON.stringify(json));
-          console.log("result", result);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     fetch("http://localhost:3001/category", {
+  //       method: "post", // 통신방법
+  //       headers: {
+  //         "content-type": "application/json",
+  //       }, // API응답 정보 담기
+  //       body: JSON.stringify(post), //전달 내용
+  //     })
+  //       .then((res) => res.json())
+  //       .then((json) => {
+  //         console.log(json);
+  //         setResult(JSON.stringify(json));
+  //         setDummy(dummy + 1);
+  //         console.log("dddd: ", dummy);
+  //         console.log("result", result);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   console.log("rrrr ", result);
+  // }, [dummy, result]);
 
   const onClickCity = (id) => {
     setAddress({
@@ -290,7 +297,7 @@ const FindHospital = () => {
             color="#1F2933"
             type="submit"
             marginTop="8rem"
-            onClick={() => submitCategory()}
+            //onClick={() => submitCategory()}
           />
         </ButtonBox>
       </Link>

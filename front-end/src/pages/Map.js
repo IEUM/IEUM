@@ -70,7 +70,7 @@ const Map = ({ location }) => {
 
       // 마커에 표시할 인포윈도우를 생성합니다
       const infowindow = new kakao.maps.InfoWindow({
-        content: "<div  style='color:black'>" + el.hospital_name + "</div>", // 인포윈도우에 표시할 내용
+        content: "<div style='color:black'>" + el.hospital_name + "</div>", // 인포윈도우에 표시할 내용
       });
 
       // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
@@ -122,6 +122,15 @@ const Map = ({ location }) => {
       <HospitalListSearchBox>
         <HospitalListRow>
           <Text size="24px">{result.length} 개의 결과</Text>
+          {/* <Link
+            to={{
+              pathname: `/hospitalList`,
+              state: {
+                where: where,
+                result: result,
+              },
+            }}
+          > */}
           <Button
             name="지도 닫기"
             fontSize="1.5"
@@ -130,6 +139,7 @@ const Map = ({ location }) => {
             type="submit"
             marginTop="0rem"
           />
+          {/* </Link> */}
         </HospitalListRow>
       </HospitalListSearchBox>
       <MapBox id="map" />
