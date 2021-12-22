@@ -100,30 +100,6 @@ const FindHospital = () => {
     fetchData();
   };
 
-  const submitAddress = () => {
-    closeModal();
-    try {
-      const post = { city: address.city, gu: address.gu, dong: address.dong };
-      console.log(post);
-
-      fetch(`${SERVER}/address`, {
-        method: "post", // 통신방법
-        headers: {
-          "content-type": "application/json",
-        }, // API응답 정보 담기
-        body: JSON.stringify(post), //전달 내용
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json);
-          setResult(JSON.stringify(json));
-          console.log(result);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const submitCity = () => {
     try {
       const post = { city: address.city };
@@ -168,35 +144,37 @@ const FindHospital = () => {
     }
   };
 
-  // const submitCategory = () => {
-  //   try {
-  //     const post = {
-  //       city: address.city,
-  //       gu: address.gu,
-  //       dong: address.dong,
-  //       category: address.category,
-  //     };
-  //     console.log(post);
+  const submitAddress = () => {
+    closeModal();
+    try {
+      const post = { city: address.city, gu: address.gu, dong: address.dong };
+      console.log(post);
 
-  //     fetch(`${SERVER}/category`, {
-  //       method: "post", // 통신방법
-  //       headers: {
-  //         "content-type": "application/json",
-  //       }, // API응답 정보 담기
-  //       body: JSON.stringify(post), //전달 내용
-  //     })
-  //       .then((res) => res.json())
-  //       .then((json) => {
-  //         console.log(json);
-  //         setResult(JSON.stringify(json));
-  //         setDummy(dummy + 1);
-  //         console.log("dddd: ", dummy);
-  //         console.log("result", result);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      fetch(`${SERVER}/address`, {
+        method: "post", // 통신방법
+        headers: {
+          "content-type": "application/json",
+        }, // API응답 정보 담기
+        body: JSON.stringify(post), //전달 내용
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          //console.log(json);
+          setResult(json);
+          //setResult(JSON.stringify(json));
+          console.log(result);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCategory = (id) => {
+    const categoryFilter = result.filter(
+      (element) => element.categories === id
+    );
+    setResult(categoryFilter);
+  };
 
   // useEffect(() => {
   //   console.log("rrrr ", result);
@@ -268,12 +246,13 @@ const FindHospital = () => {
           {categories.map((c, index) => (
             <Items
               key={c.id}
-              onClick={() =>
+              onClick={() => {
                 setAddress({
                   ...address,
                   category: c.text,
-                })
-              }
+                });
+                handleCategory(c.text);
+              }}
             >
               {c.text}
             </Items>
@@ -298,7 +277,10 @@ const FindHospital = () => {
             color="#1F2933"
             type="submit"
             marginTop="8rem"
-            //onClick={() => submitCategory()}
+            onClick={() => {
+              setResult(JSON.stringify(result));
+              // console.log(result);
+            }}
           />
         </ButtonBox>
       </Link>
@@ -332,12 +314,12 @@ const FindHospital = () => {
             {dongList.map((c, index) => (
               <Items
                 key={c}
-                onClick={() =>
+                onClick={() => {
                   setAddress({
                     ...address,
                     dong: c.temp_dong,
-                  })
-                }
+                  });
+                }}
               >
                 {c.temp_dong}
               </Items>
