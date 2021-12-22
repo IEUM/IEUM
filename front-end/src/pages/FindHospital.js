@@ -48,7 +48,6 @@ const Input = styled.input`
 const FindHospital = () => {
   const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
-  const [show, setShow] = useState(true);
   const [where, setWhere] = useState("위치설정");
   const [keyword, setKeyword] = useState("");
   const [result, setResult] = useState("");
@@ -67,7 +66,6 @@ const FindHospital = () => {
   };
   const closeModal = () => {
     setModalOpen(false);
-    setShow(!show);
   };
 
   const handleChange = (e) => {
@@ -229,7 +227,7 @@ const FindHospital = () => {
         <Text size="24">필터</Text>
       </LocationBox>
 
-      {show ? (
+      {result === "" ? (
         <Menu
           color="rgba(255, 255, 255, 0.1)"
           blur="blur(1.7px)"

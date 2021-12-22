@@ -39,7 +39,7 @@ const Modal = (props) => {
         <section>
           <header>
             <Row>
-              <LocationBox>
+              <LocationBox onClick={close}>
                 <Image src={Location} />
                 <Text marginRight="3">______</Text>
                 <Image
