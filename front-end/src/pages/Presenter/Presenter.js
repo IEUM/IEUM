@@ -16,6 +16,7 @@ export const Box = styled.div`
   background-color: ${(props) =>
     props.backgroundColor || `${palette.darkBlack}`};
   margin-top: ${(props) => props.marginTop || "0px"};
+  margin-bottom: ${(props) => props.marginBottom || "0px"};
   min-height: ${(props) => props.height || "4rem"};
   padding-left: ${(props) => props.paddingLeft || "0rem"};
   padding-top: ${(props) => props.paddingTop || "0rem"};

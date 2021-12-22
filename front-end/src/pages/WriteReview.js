@@ -59,41 +59,31 @@ const WriteReview = ({ location }) => {
       <Box>
         <h2>글쓰기</h2>
         <p>Microphone: {listening ? "on" : "off"}</p>
-        <button onClick={SpeechRecognition.startListening}>Start</button>
+        <button
+          onClick={
+            SpeechRecognition.startListening
+            //   ({
+            //   continuous: true,
+            //   language: "ko",
+            // })
+          }
+        >
+          Start
+        </button>
         <button onClick={SpeechRecognition.stopListening}>Stop</button>
         <button onClick={resetTranscript}>Reset</button>
-        <p>{transcript}</p>
       </Box>
-      <Textarea onChange={(e) => setContent(e.target.value)}></Textarea>
-      <Box flexDirection="column" marginTop="1rem" backgroundColor="none">
-        <Box
-          backgroundColor="none"
-          paddingLeft="2rem"
-          justifyContent="flex-start"
-        >
-          <Text>입력방식 선택: </Text>
-        </Box>
+      <Textarea
+        onChange={(e) => setContent(e.target.value)}
+        value={{ transcript }.transcript}
+      ></Textarea>
 
-        <Row>
-          <Button
-            name="음성인식"
-            width="8rem"
-            height="3rem"
-            type="submit"
-            fontSize="1.6"
-            borderRadius="20px"
-            borderColor="#1F2933"
-          />
-          <Button
-            name="키보드"
-            width="8rem"
-            height="3rem"
-            type="submit"
-            fontSize="1.6"
-            borderRadius="20px"
-            borderColor="#1F2933"
-          />
-        </Row>
+      <Box
+        flexDirection="column"
+        marginTop="1rem"
+        marginBottom="1rem"
+        backgroundColor="none"
+      >
         <Row>
           <Button
             name="글 올리기"
