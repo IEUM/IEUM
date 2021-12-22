@@ -45,10 +45,8 @@ const HospitalList = ({ location }) => {
     setModalOpen(false);
   };
 
-  const [cards, setCards] = useState(false);
-
   const where = location.state.where;
-  const result = JSON.parse(location.state.result);
+  const result = location.state.result;
 
   return (
     <Wrapper alignItems="none">

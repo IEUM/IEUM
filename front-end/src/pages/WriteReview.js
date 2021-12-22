@@ -36,7 +36,7 @@ const WriteReview = ({ location }) => {
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
-
+  console.log({ transcript }.transcript);
   const submitContent = () => {
     const post = {
       content: content,

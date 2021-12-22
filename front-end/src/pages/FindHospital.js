@@ -46,12 +46,12 @@ const Input = styled.input`
 `;
 
 const FindHospital = () => {
+  //const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   const [show, setShow] = useState(true);
   const [where, setWhere] = useState("위치설정");
   const [keyword, setKeyword] = useState("");
   const [result, setResult] = useState("");
-  const [dummy, setDummy] = useState(0);
 
   const [address, setAddress] = useState({
     city: "",
@@ -98,6 +98,7 @@ const FindHospital = () => {
       }
     };
     fetchData();
+    //history.push(`/hospitalList`);
   };
 
   const submitCity = () => {
@@ -174,11 +175,8 @@ const FindHospital = () => {
       (element) => element.categories === id
     );
     setResult(categoryFilter);
+    console.log(result);
   };
-
-  // useEffect(() => {
-  //   console.log("rrrr ", result);
-  // }, [dummy, result]);
 
   const onClickCity = (id) => {
     setAddress({
@@ -213,6 +211,7 @@ const FindHospital = () => {
             value={keyword}
             onChange={handleChange}
           />
+
           <Image background="#9BA5B1" src={Search} onClick={submitKeyword} />
         </Row>
         <div
@@ -277,10 +276,6 @@ const FindHospital = () => {
             color="#1F2933"
             type="submit"
             marginTop="8rem"
-            onClick={() => {
-              setResult(JSON.stringify(result));
-              // console.log(result);
-            }}
           />
         </ButtonBox>
       </Link>
