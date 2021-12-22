@@ -9,7 +9,7 @@ import Button from "../components/Button";
 import Text from "../components/Text";
 
 import { Link } from "react-router-dom";
-import { Wrapper, Box, Row } from "./Presenter/Presenter";
+import { Wrapper, Box, Row, FloatingButton } from "./Presenter/Presenter";
 
 // import { setCookies } from "../cookies/cookies";
 // import { getCookie } from "../cookies/cookies";
@@ -59,6 +59,12 @@ const WriteReview = ({ location }) => {
       <Box>
         <h2>글쓰기</h2>
         <p>Microphone: {listening ? "on" : "off"}</p>
+      </Box>
+      <Textarea
+        onChange={(e) => setContent(e.target.value)}
+        value={{ transcript }.transcript}
+      />
+      <FloatingButton>
         <button
           onClick={
             SpeechRecognition.startListening
@@ -72,11 +78,7 @@ const WriteReview = ({ location }) => {
         </button>
         <button onClick={SpeechRecognition.stopListening}>Stop</button>
         <button onClick={resetTranscript}>Reset</button>
-      </Box>
-      <Textarea
-        onChange={(e) => setContent(e.target.value)}
-        value={{ transcript }.transcript}
-      ></Textarea>
+      </FloatingButton>
 
       <Box
         flexDirection="column"
