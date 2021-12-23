@@ -110,11 +110,11 @@ export const HospitalListRow = styled.div`
 `;
 
 export const FloatingButton = styled.div`
-  position: absolute;
-  top: 70%;
-  right: 5%;
+  position: relative;
+  bottom: 3rem;
+  left: 40%;
   @media only screen and (max-width: 780px) {
-    top: 60%;
-    right: 5%;
+    bottom: 3rem;
+    left: 30%;
   }
 `;
