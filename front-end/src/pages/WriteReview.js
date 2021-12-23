@@ -8,7 +8,7 @@ import SpeechRecognition, {
 import Textarea from "../components/Textarea";
 import Button from "../components/Button";
 import Mic from "../assets/mic.png";
-import Play from "../assets/play.png";
+import Play from "../assets/stop.png";
 import Refresh from "../assets/refresh.png";
 
 import { Link } from "react-router-dom";
@@ -39,19 +39,20 @@ const WriteReview = ({ location }) => {
 
   const [content, setContent] = useState("");
 
-  // useEffect(() => {
-  //   if (cookies.rememberText !== undefined) {
-  //     setText(cookies.rememberText);
-  //     console.log(text);
-  //     setIsRemember(true);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (cookies.rememberText !== undefined) {
+      setText(cookies.rememberText);
+
+      setIsRemember(true);
+    }
+    console.log(text);
+  }, []);
 
   const handleOnChange = (e) => {
     after1m.setMinutes(now.getMinutes() + 1);
     setIsRemember(e.target.checked);
     if (e.target.checked) {
-      setCookie("rememberText", text, { path: "/", expires: after1m });
+      setCookie("rememberText", content, { path: "/", expires: after1m });
     } else {
       removeCookie("rememberText");
     }
@@ -84,14 +85,17 @@ const WriteReview = ({ location }) => {
     console.log(post);
   };
 
-  //console.log(setCookies("cookie", content, { path: "/" }));
-
   return (
     <Wrapper>
-      <Box>
+      <Box flexDirection="column">
         <h2>글쓰기</h2>
-        <p>Microphone: {listening ? "on" : "off"}</p>
+        {/* <div style={{ marginBottom: "1rem" }}>
+          {listening ? "녹음중" : "정지"}
+        </div> */}
       </Box>
+      {/* <input value={text} onChange={(e) => setText(e.target.value)} />{" "}
+      <input type="checkBox" onChange={handleOnChange} checked={isRemember} />{" "}
+      <h1>{text}</h1> */}
       <Textarea
         onChange={(e) => setContent(e.target.value)}
         value={content || { transcript }.transcript}
@@ -131,7 +135,6 @@ const WriteReview = ({ location }) => {
           }}
         />
       </FloatingButton>
-
       <Box
         flexDirection="column"
         marginTop="1rem"
@@ -161,6 +164,10 @@ const WriteReview = ({ location }) => {
           <Link
             to={{
               pathname: `/reviewList`,
+              state: {
+                result: result,
+                key: key,
+              },
             }}
           >
             <Button
