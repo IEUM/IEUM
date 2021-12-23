@@ -46,7 +46,7 @@ const Input = styled.input`
 `;
 
 const FindHospital = () => {
-  const history = useHistory();
+  //const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   const [where, setWhere] = useState("위치설정");
   const [keyword, setKeyword] = useState("");

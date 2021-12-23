@@ -122,7 +122,7 @@ const Map = ({ location }) => {
       <HospitalListSearchBox>
         <HospitalListRow>
           <Text size="24px">{result.length} 개의 결과</Text>
-          {/* <Link
+          <Link
             to={{
               pathname: `/hospitalList`,
               state: {
@@ -130,16 +130,16 @@ const Map = ({ location }) => {
                 result: result,
               },
             }}
-          > */}
-          <Button
-            name="지도 닫기"
-            fontSize="1.5"
-            width="10rem"
-            height="2.5rem"
-            type="submit"
-            marginTop="0rem"
-          />
-          {/* </Link> */}
+          >
+            <Button
+              name="지도 닫기"
+              fontSize="1.5"
+              width="10rem"
+              height="2.5rem"
+              type="submit"
+              marginTop="0rem"
+            />
+          </Link>
         </HospitalListRow>
       </HospitalListSearchBox>
       <MapBox id="map" />

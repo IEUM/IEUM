@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SERVER } from "../config";
+import { useCookies } from "react-cookie";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -11,20 +12,42 @@ import Text from "../components/Text";
 import { Link } from "react-router-dom";
 import { Wrapper, Box, Row, FloatingButton } from "./Presenter/Presenter";
 
-// import { setCookies } from "../cookies/cookies";
-// import { getCookie } from "../cookies/cookies";
-
 const WriteReview = ({ location }) => {
   const result = location.state.result;
   const key = location.state.key;
+  const [text, setText] = useState("");
+  const [isRemember, setIsRemember] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(["rememberText"]);
+
   const today = new Date();
   let year = today.getFullYear();
   let month = ("0" + (today.getMonth() + 1)).slice(-2);
   let day = ("0" + today.getDate()).slice(-2);
 
+  let now = new Date();
+  let after1m = new Date();
+
   let dateString = year + "-" + month + "-" + day;
 
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    if (cookies.rememberText !== undefined) {
+      setText(cookies.rememberText);
+      console.log(text);
+      setIsRemember(true);
+    }
+  }, []);
+
+  const handleOnChange = (e) => {
+    after1m.setMinutes(now.getMinutes() + 1);
+    setIsRemember(e.target.checked);
+    if (e.target.checked) {
+      setCookie("rememberText", text, { path: "/", expires: after1m });
+    } else {
+      removeCookie("rememberText");
+    }
+  };
 
   const {
     transcript,
@@ -36,7 +59,6 @@ const WriteReview = ({ location }) => {
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
-  console.log({ transcript }.transcript);
   const submitContent = () => {
     const post = {
       content: content,
@@ -53,6 +75,8 @@ const WriteReview = ({ location }) => {
     });
     console.log(post);
   };
+
+  //console.log(setCookies("cookie", content, { path: "/" }));
 
   return (
     <Wrapper>
