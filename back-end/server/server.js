@@ -127,11 +127,6 @@ app.post("/review", (req, res) => {
       if (err) {
         console.log("실패");
       } else {
-        // const sendAllReview = rows.filter((row) => {
-        //   return row.hospital_id.indexOf() !== -1;
-        // });
-        // res.send(sendAllReview);
-        // console.log(sendAllReview);
         res.send(rows);
         console.log(rows);
       }
