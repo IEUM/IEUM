@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Spinner from '../components/Spinner';
 import { useLocation } from 'react-router';
 import medicine from '../data.json';
 import { Link } from 'react-router-dom';
@@ -11,6 +12,7 @@ const MatchMedicine = ({history}) => {
     const location = useLocation();
     const [mediName, setMediName] = useState("약정보없음");
     const [mediPic, setMedipic] = useState([]);
+
 
     let barName = "약 정보";
     let mediInfo;
@@ -25,7 +27,6 @@ const MatchMedicine = ({history}) => {
             for(var i =0; i < medicine.length; i++){
                 if(medicine[i].pFront == gName){
                     mediInfo = medicine[i];
-                    
                     break;
                 }
 
@@ -34,9 +35,7 @@ const MatchMedicine = ({history}) => {
             console.log(mediphoto)
             setMediName(mediInfo.pName);
             getImage(mediphoto);
-            getApiDataFromProductNumber(mediInfo.pNum)
-            
-
+            getApiDataFromProductNumber(mediInfo.pNum);
             window.localStorage.setItem("info", JSON.stringify(mediInfo));
             
             } else {
@@ -82,10 +81,10 @@ const MatchMedicine = ({history}) => {
 
     return (
         
-        <div className = "recog1">
+        <div className = "wrapper">
         
-            <div className = "bar"></div>
-            <div className="logorec">{barName}</div>
+            <div className = "bar2"></div>
+            <div className="bartext">{barName}</div>
             <div className="mediname">{mediName}</div>
             <div className = "showimg">{mediPic}</div>
 
@@ -93,10 +92,11 @@ const MatchMedicine = ({history}) => {
 
 
             <div id="myImg" width="300px" height="300px"></div>
+            <div buttons1>
             <Link to="./BasicMediInfo">
                 <input type="button" className= "basicinfo" id="basicinfo" width="330px" height="90px"/>
             </Link>
-            <Link to="./BasicMediInfo">
+            <Link to="./Cautioninfo">
                 <input type="button" className= "caution" id="caution" width="330px" height="90px"/>
             </Link>
             <Link to="./BasicMediInfo">
@@ -105,7 +105,7 @@ const MatchMedicine = ({history}) => {
             <Link to="./BasicMediInfo">
                 <input type="button" className= "shapeinfo" id="shapeinfo" width="330px" height="90px"/>
             </Link>
-            
+            </div>
             {/*
           <input type="button"  className= "basicinfo" onClick = { () => history.push({
                 pathname : "/BasicMediInfo",

@@ -1,5 +1,7 @@
 import '../css/FindGrainText.css';
 import {useState, useEffect} from 'react';
+import { Link } from "react-router-dom";
+
 
 const FindGrainText = ({history})=> {
 
@@ -8,7 +10,6 @@ const FindGrainText = ({history})=> {
     const [file, setFile] = useState('');
     const [previewURL, setPreviewURL] = useState([]);
     const [resultArray, setResultArray] = useState([]);
-
 
     const previewList = makeImagePreview();
   
@@ -81,16 +82,18 @@ const FindGrainText = ({history})=> {
       .then((function(data) {
         console.log("API 호출 결과값 : ");
         var result = data.responses[0].fullTextAnnotation.text.replaceAll(/\n/g, '');
+
         console.log(result);
         window.localStorage.setItem("API_RESULT", result);
         setResultArray(resultArray => [...resultArray, result]);
       }));
+      
     }
 
   return (
     <div className = "wrapper">
       <div className = "bar2">
-        <div className="bartext">
+        <div className="bartext1">
           낱알 인식
         </div>
         </div> 
@@ -101,7 +104,7 @@ const FindGrainText = ({history})=> {
       
 
           <div className = "caution"> 
-            <p> 권고 사항 : 알약 사진 1장, 뒤집어서 1장</p> 
+            <p> 권고 사항 : 글자가 보이는 알약 사진 1장</p> 
           </div>
 
           <label className = "imgadd" for = "file"></label>

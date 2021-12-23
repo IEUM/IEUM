@@ -38,29 +38,40 @@ const BasicMediInfo = ({history}) => {
     
     return (
 
-        <div className = "recog1">
+        <div className = "wrapper">
           
 
-          <div className = "bar">
-          <div className="logorec">{barName}</div>
+          <div className = "bar2">
+          <div className="bartext1">{barName}</div>
        
         <div className = "basicInfo"> 기본 정보 </div>
         
         <div id = "name">{mediName}</div>
-        <div id = "lights">
+      
+        <span className = "highlight1"></span>
+        <span className = "highlight2"></span>
+        <span className = "hgihlight3"></span>
 
-        <span className = "highlight"></span>
+        <div className = "category">
+          <p1 id = "use">용도</p1>
+          <p1 id = "save">관리법</p1>
+          <p1 id = "eat">복용법</p1>
+        </div>
+        <div className = "textbox">
+          <span id = "textbox1"></span>
+          <span id = "textbox2"></span>
+          <span id = "textbox3"></span>
 
         </div>
 
-        <div id = "contents">
-        <div className ="effect_text" id = "t">{mediEfcyQesitm}</div>
 
-        <div className = "save_text" id = "t">{mediDepositMethodQesitm}</div>
+        <div className = "contents">
+        <div className ="effect_text" >{mediEfcyQesitm}</div>
+
+        <div className = "save_text" >{mediDepositMethodQesitm}</div>
 
         <div className = "eat_text">{mediUseMethodQesitm}</div>
-       
-        </div>
+       </div>
       
     
 

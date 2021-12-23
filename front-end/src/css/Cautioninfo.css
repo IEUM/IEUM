@@ -1,0 +1,24 @@
+.caution_text{
+    position: absolute;
+    width: 400px;
+    height: 41px;
+    left: 30px;
+    top: 202px;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 41px;
+    color: #FFFFFF;
+    
+    }
+.textbox4{
+position: absolute;
+width: 420px;
+height: 700px;
+left: 20px;
+top: 202px;
+        
+background: #1F2933;
+    
+}

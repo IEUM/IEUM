@@ -51,7 +51,7 @@ const FindGrain = ({history}) => {
     
     <div className = "wrapper">
       <div className = "bar2">
-      <div className="bartext">{barName}</div>
+      <div className="bartext1">{barName}</div>
       </div>    
 
       <div className = "buttons">

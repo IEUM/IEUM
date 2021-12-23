@@ -10,6 +10,7 @@ import FindGrainText from "./pages/FindGrainText";
 import FindmediText from "./pages/FindmediText";
 import MatchMedicine from "./pages/MatchMedicine";
 import BasicMediInfo from "./pages/BasicMediInfo";
+import Cautioninfo from "./pages/Cautioninfo";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/FindGrainText" component={FindGrainText}/>
         <Route exact path="/MatchMedicine" component = {MatchMedicine}/>
         <Route exact path="/BasicMediInfo" component ={BasicMediInfo}/>
+        <Route exact path="/Cautioninfo" component ={Cautioninfo}/>
         </Switch>
     </Router>
   );

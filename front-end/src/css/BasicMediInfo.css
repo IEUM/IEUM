@@ -1,8 +1,9 @@
+
 .basicInfo {
     position: absolute;
     width: 141px;
     height: 52px;
-    left: 125px;
+    left: 12rem;
     top: 51px;
     
     font-family: Noto Sans KR;
@@ -13,10 +14,9 @@
     
     color: #FFFFFF;
     }
-    .recog1 {
-        
-    display: flex;
-    }
+.box{
+    left : 10rem;
+}
 #basic_text{
 position: absolute;
 width: 341px;
@@ -33,49 +33,47 @@ line-height: 41px;
 
 color: #FFFFFF;
     }
-    
-    .bar {
-    position: absolute;
-    width: 390px;
-    height: 50px;
-    left: 0px;
-    top: 0px;
-    background: #1F2933;
-    border: 0.5px solid #E5E5E5;
-    box-sizing: border-box;
-        
-    }
-#highlight{
+
+.highlight1{
 
 position: absolute;
-width: 110px;
-height: 19px;
-left: 20px;
-top: 180px;
+width: 70px;
+height: 20px;
+left: 40px;
+top: 171px;
 
 background: rgba(241, 245, 16, 0.3);
 }
+
+.highlight2{
+
+    position: absolute;
+    width: 70px;
+    height: 20px;
+    left: 40px;
+    top: 360px;
     
-    .logorec7 {
-        
-    left: 153px;
-    top: 4px;
-        
-    font-family: Noto Sans KR;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 28px;
-    line-height: 41px;
-    color: #FFFFFF;
-                
+    background: rgba(241, 245, 16, 0.3);
     }
+.highlight3{
+
+    position: absolute;
+    width: 70px;
+    height: 20px;
+    left: 40px;
+    top: 560px;
+        
+    background: rgba(241, 245, 16, 0.3);
+    }
+    
+        
 #name {
 
 position :absolute;
 text-align: center;
 width: 375px;
 height: 41px;
-left: 9px;
+left: 4rem;
 top: 113px;
 
 font-family: Noto Sans KR;
@@ -87,34 +85,133 @@ line-height: 41px;
 
 color: #FFFFFF;
     }
-#contents{
-position : relative;
+
+#use{
+position: absolute;
+width: 110px;
+height: 41px;
+left: 20px;
+top: 161px;
 font-family: Noto Sans KR;
 font-style: normal;
-font-weight: 500;
+font-weight: bold;
 font-size: 28px;
 line-height: 41px;
 /* identical to box height */
 
 color: #FFFFFF;
-top: 202px;
 
+     
 }
-
-#effect_text{
+#save {
 position: absolute;
-width: 341px;
+width: 110px;
 height: 41px;
-left: 30px;
-top: 202px;
+left: 20px;
+top: 350px;
+font-family: Noto Sans KR;
+font-style: normal;
+font-weight: bold;
+font-size: 28px;
+line-height: 41px;
+/* identical to box height */
+
+color: #FFFFFF;
+
 
 }
+#eat{
+    position: absolute;
+    width: 110px;
+    height: 41px;
+    left: 20px;
+    top: 550px;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 41px;
+
     
-#save_text{
-width: 341px;
+    color: #FFFFFF;
+    
+
+}
+
+.effect_text{
+position: absolute;
+width: 400px;
 height: 41px;
 left: 30px;
+top: 207px;
+font-family: Noto Sans KR;
+font-style: normal;
+font-weight: 500;
+font-size: 28px;
+line-height: 41px;
+color: #FFFFFF;
+
+}
+
+#textbox1{
+
+position: absolute;
+width: 420px;
+height: 110px;
+left: 20px;
 top: 202px;
+    
+background: #1F2933;
+}
+
+#textbox2{
+
+position: absolute;
+width: 420px;
+height: 140px;
+left: 20px;
+top: 395px;
+        
+background: #1F2933;
+    }
+
+#textbox3{
+
+position: absolute;
+width: 420px;
+height: 180px;
+left: 20px;
+top: 595px;                
+background: #1F2933;
+            }
+    
+.save_text{
+position : absolute;
+width: 400px;
+height:41px;
+left: 30px;
+top: 400px;
+font-family: Noto Sans KR;
+font-style: normal;
+font-weight: 500;
+font-size: 28px;
+line-height: 41px;
+color: #FFFFFF;
+}
+
+.eat_text{
+position : absolute;
+width: 400px;
+height:41px;
+left: 30px;
+top:600px;
+margin-bottom: 20px;
+font-family: Noto Sans KR;
+font-style: normal;
+font-weight: 500;
+font-size: 28px;
+line-height: 41px;
+color: #FFFFFF;
 }
 
 
