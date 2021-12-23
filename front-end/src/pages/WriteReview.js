@@ -7,10 +7,18 @@ import SpeechRecognition, {
 
 import Textarea from "../components/Textarea";
 import Button from "../components/Button";
-import Text from "../components/Text";
+import Mic from "../assets/mic.png";
+import Play from "../assets/play.png";
+import Refresh from "../assets/refresh.png";
 
 import { Link } from "react-router-dom";
-import { Wrapper, Box, Row, FloatingButton } from "./Presenter/Presenter";
+import {
+  Wrapper,
+  Box,
+  Row,
+  FloatingButton,
+  Image,
+} from "./Presenter/Presenter";
 
 const WriteReview = ({ location }) => {
   const result = location.state.result;
@@ -89,35 +97,38 @@ const WriteReview = ({ location }) => {
         value={content || { transcript }.transcript}
       />
       <FloatingButton>
-        <button
-          onClick={
-            SpeechRecognition.startListening
-            //   ({
-            //   continuous: true,
-            //   language: "ko",
-            // })
-          }
-        >
-          Start
-        </button>
-        <button
-          onClick={() => {
-            SpeechRecognition.stopListening();
-            if (content.length <= 1) {
-              setContent({ transcript }.transcript);
+        {!listening ? (
+          <Image
+            alt="mic"
+            src={Mic}
+            onClick={
+              SpeechRecognition.startListening
+              //   ({
+              //   continuous: true,
+              //   language: "ko",
+              // })
             }
-            console.log(content.length);
-          }}
-        >
-          Stop
-        </button>
-        <button
+          />
+        ) : (
+          <Image
+            alt="stop"
+            src={Play}
+            onClick={() => {
+              SpeechRecognition.stopListening();
+              if (content.length <= 1) {
+                setContent({ transcript }.transcript);
+              }
+              console.log(content.length);
+            }}
+          />
+        )}
+        <Image
+          alt="refresh"
+          src={Refresh}
           onClick={() => {
             resetTranscript() || setContent("");
           }}
-        >
-          Reset
-        </button>
+        />
       </FloatingButton>
 
       <Box
