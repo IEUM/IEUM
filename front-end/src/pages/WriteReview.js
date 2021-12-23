@@ -32,9 +32,6 @@ const WriteReview = ({ location }) => {
   let month = ("0" + (today.getMonth() + 1)).slice(-2);
   let day = ("0" + today.getDate()).slice(-2);
 
-  let now = new Date();
-  let after1m = new Date();
-
   let dateString = year + "-" + month + "-" + day;
 
   const [content, setContent] = useState("");
@@ -42,21 +39,10 @@ const WriteReview = ({ location }) => {
   useEffect(() => {
     if (cookies.rememberText !== undefined) {
       setText(cookies.rememberText);
-
       setIsRemember(true);
     }
     console.log(text);
   }, []);
-
-  const handleOnChange = (e) => {
-    after1m.setMinutes(now.getMinutes() + 1);
-    setIsRemember(e.target.checked);
-    if (e.target.checked) {
-      setCookie("rememberText", content, { path: "/", expires: after1m });
-    } else {
-      removeCookie("rememberText");
-    }
-  };
 
   const {
     transcript,
@@ -83,6 +69,8 @@ const WriteReview = ({ location }) => {
       body: JSON.stringify(post),
     });
     console.log(post);
+    setCookie("rememberText", content, { path: "/" });
+    //removeCookie("rememberText");
   };
 
   return (

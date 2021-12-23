@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SERVER } from "../config";
+import { useCookies } from "react-cookie";
 
 import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
@@ -46,7 +47,6 @@ const Input = styled.input`
 `;
 
 const FindHospital = () => {
-  //const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
   const [where, setWhere] = useState("위치설정");
   const [keyword, setKeyword] = useState("");
@@ -96,7 +96,6 @@ const FindHospital = () => {
       }
     };
     fetchData();
-    //history.push(`/hospitalList`);
   };
 
   const submitCity = () => {
@@ -173,6 +172,7 @@ const FindHospital = () => {
       (element) => element.categories === id
     );
     setResult(categoryFilter);
+
     console.log(result);
   };
 
