@@ -47,7 +47,7 @@ const ReviewList = ({ location }) => {
       .then((json) => {
         const reviewsList = json.map((c, index) => json[index]);
         setReviewsList(reviewsList);
-        console.log("list", reviewsList);
+        //console.log("list", reviewsList);
         console.log(json);
       });
   };

@@ -31,13 +31,13 @@ const WriteReview = ({ location }) => {
 
   const [content, setContent] = useState("");
 
-  useEffect(() => {
-    if (cookies.rememberText !== undefined) {
-      setText(cookies.rememberText);
-      console.log(text);
-      setIsRemember(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (cookies.rememberText !== undefined) {
+  //     setText(cookies.rememberText);
+  //     console.log(text);
+  //     setIsRemember(true);
+  //   }
+  // }, []);
 
   const handleOnChange = (e) => {
     after1m.setMinutes(now.getMinutes() + 1);
@@ -86,7 +86,7 @@ const WriteReview = ({ location }) => {
       </Box>
       <Textarea
         onChange={(e) => setContent(e.target.value)}
-        value={{ transcript }.transcript}
+        value={content || { transcript }.transcript}
       />
       <FloatingButton>
         <button
@@ -100,8 +100,24 @@ const WriteReview = ({ location }) => {
         >
           Start
         </button>
-        <button onClick={SpeechRecognition.stopListening}>Stop</button>
-        <button onClick={resetTranscript}>Reset</button>
+        <button
+          onClick={() => {
+            SpeechRecognition.stopListening();
+            if (content.length <= 1) {
+              setContent({ transcript }.transcript);
+            }
+            console.log(content.length);
+          }}
+        >
+          Stop
+        </button>
+        <button
+          onClick={() => {
+            resetTranscript() || setContent("");
+          }}
+        >
+          Reset
+        </button>
       </FloatingButton>
 
       <Box
@@ -111,6 +127,15 @@ const WriteReview = ({ location }) => {
         backgroundColor="none"
       >
         <Row>
+          {/* <Link
+            to={{
+              pathname: `/reviewList`,
+              state: {
+                result: result,
+                key: key,
+              },
+            }}
+          > */}
           <Button
             name="글 올리기"
             width="12rem"
@@ -120,6 +145,7 @@ const WriteReview = ({ location }) => {
             fontSize="1.6"
             onClick={() => submitContent()}
           />
+          {/* </Link> */}
           <Link
             to={{
               pathname: `/reviewList`,
