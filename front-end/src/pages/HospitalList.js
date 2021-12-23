@@ -37,7 +37,7 @@ const Card = styled.div`
 `;
 
 const HospitalList = ({ location }) => {
-  const [cookies, setCookie, removeCookie] = useCookies(["where"]);
+  //const [cookies, setCookie, removeCookie] = useCookies(["where"]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [where, setWhere] = useState("위치설정");

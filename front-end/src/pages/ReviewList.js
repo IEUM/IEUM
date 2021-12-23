@@ -32,6 +32,12 @@ const ReviewList = ({ location }) => {
   const key = location.state.key;
 
   const [reviewsList, setReviewsList] = useState([]);
+  // const [result, setResult] = useState([]);
+  // const [key, setKey] = useState("");
+
+  useEffect(() => {
+    submitHospitalId();
+  }, []);
 
   const submitHospitalId = () => {
     const post = { hospital_id: result[key].hospital_id };
@@ -51,10 +57,6 @@ const ReviewList = ({ location }) => {
         console.log(json);
       });
   };
-
-  useEffect(() => {
-    submitHospitalId();
-  }, []);
 
   return (
     <Wrapper>
