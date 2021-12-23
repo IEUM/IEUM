@@ -105,9 +105,14 @@ const ReviewList = ({ location }) => {
         >
           <Row>
             <ImageBox>
-              <Image src={User} alt="user" />
+              <Image src={User} alt="user" style={{ marginTop: "1rem" }} />
               <Image src={Play} alt="user" />
-              <Speech styles={style} text={c.content} />,
+              <div style={{ position: "relative", top: "-2rem" }}>
+                <Speech
+                  //styles={style}
+                  text={c.content}
+                />
+              </div>
             </ImageBox>
             <TextBox>
               <Text key={index} lineHeight="1rem">
