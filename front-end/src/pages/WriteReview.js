@@ -8,8 +8,9 @@ import SpeechRecognition, {
 import Textarea from "../components/Textarea";
 import Button from "../components/Button";
 import Mic from "../assets/mic.png";
-import Play from "../assets/stop.png";
+import Stop from "../assets/stop.png";
 import Refresh from "../assets/refresh.png";
+import Play from "../assets/play.png";
 
 import { Link } from "react-router-dom";
 import {
@@ -104,7 +105,7 @@ const WriteReview = ({ location }) => {
         ) : (
           <Image
             alt="stop"
-            src={Play}
+            src={Stop}
             onClick={() => {
               SpeechRecognition.stopListening();
               if (content.length <= 1) {
@@ -114,10 +115,10 @@ const WriteReview = ({ location }) => {
             }}
           />
         )}
+        <Image alt="play" src={Play} />
         <Image
           alt="refresh"
           src={Refresh}
-          style={{ marginLeft: "1rem" }}
           onClick={() => {
             resetTranscript() || setContent("");
           }}
