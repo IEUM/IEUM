@@ -53,7 +53,7 @@ background-image: url("../assets/basicinfo.png");
 background-repeat : no-repeat;
 width: 330px;
 height: 90px;
-left: 2rem;
+left: 1.5rem;
 top: 360px;
 
 }
@@ -64,7 +64,7 @@ background-image: url("../assets/caution.png");
 background-repeat : no-repeat;
 width: 330px;
 height: 90px;
-left: 2rem;
+left: 1.5rem;
 top: 720px;
 }
 
@@ -75,7 +75,7 @@ background-image : url("../assets/shapeinfo.png");
 background-repeat: no-repeat;
 width: 330px;
 height: 90px;
-left: 2rem;
+left: 1.5rem;
 top: 481px;
 
 }
@@ -86,7 +86,7 @@ background-image : url("../assets/eatinfo.png");
 background-repeat : no-repeat;
 width : 330px;
 height :90px;
-left: 2rem;
+left: 1.5rem;
 top: 600px;
 
 }

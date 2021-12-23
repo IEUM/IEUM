@@ -11,6 +11,7 @@ import FindmediText from "./pages/FindmediText";
 import MatchMedicine from "./pages/MatchMedicine";
 import BasicMediInfo from "./pages/BasicMediInfo";
 import Cautioninfo from "./pages/Cautioninfo";
+import Exception from "./pages/Exception";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/MatchMedicine" component = {MatchMedicine}/>
         <Route exact path="/BasicMediInfo" component ={BasicMediInfo}/>
         <Route exact path="/Cautioninfo" component ={Cautioninfo}/>
+        <Route exact path ="/Exception" component = {Exception}/>
         </Switch>
     </Router>
   );

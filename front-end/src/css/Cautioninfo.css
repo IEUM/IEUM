@@ -22,3 +22,22 @@ top: 202px;
 background: #1F2933;
     
 }
+
+    
+.bartext1{ 
+    position : absolute;
+        text-align: center;
+        width: 110px;
+        height: 41px;
+        top: 4px;
+        margin-left: 40%;
+        font-family: Noto Sans KR;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 41px;
+        /* identical to box height */
+            
+        color: #FFFFFF;   
+
+    }

@@ -1,0 +1,17 @@
+.warn{ 
+    position : absolute;
+        text-align: center;
+        width: 300px;
+        height: 200px;
+        top: 300px;
+        margin-left: 10%;
+        font-family: Noto Sans KR;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 41px;
+        /* identical to box height */
+            
+        color: #FFFFFF;   
+
+    }

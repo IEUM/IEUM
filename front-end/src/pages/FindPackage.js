@@ -56,7 +56,7 @@ const FindPackage = ({history})=> {
       
       </h4>
       
-      <button className = "search" onClick = { () => history.push("/MatchMedicine")}>검색하기</button>
+      <button className = "search" onClick = { () => history.push("/Exception")}>검색하기</button>
       
       </div>    
       </div>
