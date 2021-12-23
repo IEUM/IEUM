@@ -125,6 +125,7 @@ const WriteReview = ({ location }) => {
         <Image
           alt="refresh"
           src={Refresh}
+          style={{ marginLeft: "1rem" }}
           onClick={() => {
             resetTranscript() || setContent("");
           }}
