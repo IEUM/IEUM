@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { SERVER } from "../config";
-import { useCookies } from "react-cookie";
 
 import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
@@ -172,7 +171,6 @@ const FindHospital = () => {
       (element) => element.categories === id
     );
     setResult(categoryFilter);
-
     console.log(result);
   };
 

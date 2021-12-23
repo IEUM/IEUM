@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import Location from "../assets/location.png";
 import ArrowBack from "../assets/arrow_back.png";
@@ -36,7 +37,11 @@ const Card = styled.div`
 `;
 
 const HospitalList = ({ location }) => {
+  const [cookies, setCookie, removeCookie] = useCookies(["where"]);
+
   const [modalOpen, setModalOpen] = useState(false);
+  const [where, setWhere] = useState("위치설정");
+  const [result, setResult] = useState([]);
 
   const openModal = () => {
     setModalOpen(true);
@@ -45,8 +50,14 @@ const HospitalList = ({ location }) => {
     setModalOpen(false);
   };
 
-  const where = location.state.where;
-  const result = location.state.result;
+  useEffect(() => {
+    if (location.state) {
+      setWhere(location.state.where);
+      setResult(location.state.result);
+    }
+  }, []);
+  // const where = location.state.where;
+  // const result = location.state.result;
 
   return (
     <Wrapper alignItems="none">
