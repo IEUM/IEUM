@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { SERVER } from "../config";
 import { useCookies } from "react-cookie";
+import Speech from "react-speech";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -124,6 +125,9 @@ const WriteReview = ({ location }) => {
           }}
         />
       </FloatingButton>
+      <div style={{ position: "relative", top: "-5rem" }}>
+        <Speech text={content} />
+      </div>
       <Box
         flexDirection="column"
         marginTop="1rem"
