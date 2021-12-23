@@ -140,14 +140,12 @@ app.post("/review", (req, res) => {
 });
 
 app.post("/write", (req, res) => {
-  res.cookie("cookie", "cookie");
-  console.log(req.cookies);
+  // res.cookie("cookie", "cookie");
+  // console.log(req.cookies);
   const hospital_id = req.body.hospital_id;
   const content = req.body.content;
   const today = req.body.today;
-  // console.log(hospital_id);
-  // console.log(content);
-  // console.log(today);
+  console.log(content);
   connection.query(
     "insert into review(user_id, hospital_id, content, review_date) values(?,?,?,?)",
     [1, hospital_id, content, today],

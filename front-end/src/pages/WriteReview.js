@@ -127,7 +127,8 @@ const WriteReview = ({ location }) => {
         backgroundColor="none"
       >
         <Row>
-          {/* <Link
+          <Link
+            onClick={() => submitContent()}
             to={{
               pathname: `/reviewList`,
               state: {
@@ -135,17 +136,16 @@ const WriteReview = ({ location }) => {
                 key: key,
               },
             }}
-          > */}
-          <Button
-            name="글 올리기"
-            width="12rem"
-            height="3rem"
-            type="submit"
-            marginTop="3rem"
-            fontSize="1.6"
-            onClick={() => submitContent()}
-          />
-          {/* </Link> */}
+          >
+            <Button
+              name="글 올리기"
+              width="12rem"
+              height="3rem"
+              type="submit"
+              marginTop="3rem"
+              fontSize="1.6"
+            />
+          </Link>
           <Link
             to={{
               pathname: `/reviewList`,
