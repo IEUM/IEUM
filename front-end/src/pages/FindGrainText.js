@@ -87,6 +87,9 @@ const FindGrainText = ({history})=> {
         window.localStorage.setItem("API_RESULT", result);
         setResultArray(resultArray => [...resultArray, result]);
       }));
+      if (resultArray[0] == null){
+        <Link to = "./Exception"></Link>
+      }
       
     }
 

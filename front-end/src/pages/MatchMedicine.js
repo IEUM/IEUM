@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Spinner from '../components/Spinner';
 import { useLocation } from 'react-router';
 import medicine from '../data.json';
 import { Link } from 'react-router-dom';
@@ -71,6 +70,7 @@ const MatchMedicine = ({history}) => {
                 // API 결과 값 스토리지에 저장
                 window.localStorage.setItem("API_RESULT_2", JSON.stringify(item));
                 console.log(JSON.parse(jsonData).response.body.items);
+
             } else {
                 //...
             }
