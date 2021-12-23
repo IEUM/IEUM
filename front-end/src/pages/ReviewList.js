@@ -29,25 +29,10 @@ const DateBox = styled.div`
   width: 10rem;
 `;
 
-const style = {
-  play: {
-    button: {
-      width: "28",
-      height: "28",
-      cursor: "pointer",
-      pointerEvents: "none",
-      outline: "none",
-      backgroundColor: "yellow",
-      border: "solid 1px rgba(255,255,255,1)",
-      borderRadius: 6,
-    },
-  },
-};
-
 const ReviewList = ({ location }) => {
   const result = location.state.result;
   const key = location.state.key;
-  console.log(result);
+  //console.log(result);
 
   const [reviewsList, setReviewsList] = useState([]);
   const [likeCount, setLikeCount] = useState(0);
