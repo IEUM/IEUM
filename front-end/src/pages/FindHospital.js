@@ -158,6 +158,7 @@ const FindHospital = () => {
         .then((json) => {
           //console.log(json);
           setResult(json);
+          setWhere(address.dong);
           //setResult(JSON.stringify(json));
           console.log(result);
         });
