@@ -37,7 +37,7 @@ const Cautioninfo = ({history}) => {
           
 
           <div className = "newbar"></div>
-          <div className="bartext1">{barName}</div>
+          <div className="bartext10">{barName}</div>
        
         <div className = "basicInfo"> 주의 사항 </div>
         

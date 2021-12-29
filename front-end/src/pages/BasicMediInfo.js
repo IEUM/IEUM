@@ -41,8 +41,8 @@ const BasicMediInfo = ({history}) => {
         <div className = "wrapper">
           
 
-          <div className = "newbar"></div>
-          <div className="bartext1">{barName}</div>
+          <div className = "bar2"></div>
+          <div className="bartext10">{barName}</div>
        
         <div className = "basicInfo"> 기본 정보 </div>
         

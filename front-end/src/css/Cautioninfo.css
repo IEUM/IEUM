@@ -1,8 +1,8 @@
 .caution_text{
     position: absolute;
-    width: 400px;
+    width: 380px;
     height: 41px;
-    left: 30px;
+    left: 10px;
     top: 202px;
     font-family: Noto Sans KR;
     font-style: normal;
@@ -14,30 +14,42 @@
     }
 .textbox4{
 position: absolute;
-width: 420px;
+width: 400px;
 height: 700px;
-left: 20px;
+left: 0px;
 top: 202px;
         
 background: #1F2933;
     
 }
+.newbar {
+    position: absolute;
+
+    width: 400px;
+    height: 50px;
+    left: 0px;
+    top: 0px;
+    
+    background: #1F2933;
+    border: 0.5px solid #E5E5E5;
+    box-sizing: border-box;
+    
+    }
+
+.bartext10 {
+    position : absolute;
+    text-align: center;
+    width: 110px;
+    height: 41px;
+    top: 4px;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 41px;
+    /* identical to box height */
+        
+    color: #FFFFFF;
+        }
 
     
-.bartext1{ 
-    position : absolute;
-        text-align: center;
-        width: 110px;
-        height: 41px;
-        top: 4px;
-        margin-left: 40%;
-        font-family: Noto Sans KR;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 28px;
-        line-height: 41px;
-        /* identical to box height */
-            
-        color: #FFFFFF;   
-
-    }
