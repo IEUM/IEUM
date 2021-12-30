@@ -53,7 +53,8 @@ const Main = () => {
               type="submit"
               marginTop="5rem"
             />
-          </Link>
+            </Link>
+          <Link to="/FindMedicine">
           <Button
             name="의약품 찾기"
             width="20rem"
@@ -62,6 +63,7 @@ const Main = () => {
             type="submit"
             marginTop="4rem"
           />
+          </Link>
         </ButtonBox>
       </Items>
     </Wrapper>

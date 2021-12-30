@@ -1,0 +1,233 @@
+.wrapper {
+    display: flex;
+    width : 100%;
+    height : 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+           
+        }
+.bartext{
+    position : absolute;
+    text-align: center;
+    width: 110px;
+    height: 41px;
+    top: 4px;
+    margin-left: 1rem;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 41px;
+                
+    color: #FFFFFF;
+                }
+
+
+.showimg {
+    position : absolute;
+    left: 0rem;
+    top: 101px;
+
+}
+.mediname {
+    position: absolute;
+    text-align: center;
+    width: 375px;
+    height: 41px;
+    top: 51px;
+
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 41px;
+
+    color: #FFFFFF;
+}
+
+input#basicinfo {
+position: absolute;
+background-image: url("../assets/basicinfo.png");
+background-repeat : no-repeat;
+width: 330px;
+height: 90px;
+left: 1.5rem;
+top: 360px;
+
+}
+
+input#caution {
+position: absolute;
+background-image: url("../assets/caution.png");
+background-repeat : no-repeat;
+width: 330px;
+height: 90px;
+left: 1.5rem;
+top: 720px;
+}
+
+
+input#shapeinfo {
+position : absolute;
+background-image : url("../assets/shapeinfo.png");
+background-repeat: no-repeat;
+width: 330px;
+height: 90px;
+left: 1.5rem;
+top: 481px;
+
+}
+
+input#eatinfo {
+position : absolute;
+background-image : url("../assets/eatinfo.png");
+background-repeat : no-repeat;
+width : 330px;
+height :90px;
+left: 1.5rem;
+top: 600px;
+
+}
+
+.astext{
+position: absolute;
+background : none;
+margin :0;
+padding :0;
+border : none;
+cursor: pointer;
+width: 144px;
+height: 29px;
+left: 123px;
+top: 314px;
+
+font-family: Noto Sans KR;
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+outline: none;
+text-decoration-line: underline;
+
+color: #9BA5B1;
+}
+
+@media screen and (min-width: 769px) {
+    .wrapper {
+        display: flex;
+        width : 100%;
+        height : 100%;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        flex-direction: column;
+               
+            }
+    .bartext{
+        position : absolute;
+        text-align: center;
+        width: 110px;
+        height: 41px;
+        top: 4px;
+        left: 45%;
+        font-family: Noto Sans KR;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 41px;
+                    
+        color: #FFFFFF;
+                    }
+    
+    
+    .showimg {
+        position : absolute;
+        left: 36.5%;
+        top: 101px;
+    
+    }
+    .mediname {
+        position: absolute;
+        text-align: center;
+        width: 375px;
+        height: 41px;
+        top: 51px;
+    
+        font-family: Noto Sans KR;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 28px;
+        line-height: 41px;
+    
+        color: #FFFFFF;
+    }
+    
+    input#basicinfo {
+    position: absolute;
+    background-image: url("../assets/basicinfo.png");
+    background-repeat : no-repeat;
+    width: 330px;
+    height: 90px;
+    left: 38.5%;
+    top: 360px;
+    
+    }
+    
+    input#caution {
+    position: absolute;
+    background-image: url("../assets/caution.png");
+    background-repeat : no-repeat;
+    width: 330px;
+    height: 90px;
+    left: 38.5%;
+    top: 720px;
+    }
+    
+    
+    input#shapeinfo {
+    position : absolute;
+    background-image : url("../assets/shapeinfo.png");
+    background-repeat: no-repeat;
+    width: 330px;
+    height: 90px;
+    left: 38.5%;
+    top: 481px;
+    
+    }
+    
+    input#eatinfo {
+    position : absolute;
+    background-image : url("../assets/eatinfo.png");
+    background-repeat : no-repeat;
+    width : 330px;
+    height :90px;
+    left: 38.5%;
+    top: 600px;
+    
+    }
+    
+    .astext{
+    position: absolute;
+    background : none;
+    margin :0;
+    padding :0;
+    border : none;
+    cursor: pointer;
+    width: 144px;
+    height: 29px;
+    top: 314px;
+    left: 45%;
+    text-align: center;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    outline: none;
+    text-decoration-line: underline;
+    
+    color: #9BA5B1;
+    }
+    
+
+}
