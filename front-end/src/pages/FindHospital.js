@@ -16,6 +16,7 @@ import {
   ButtonBox,
   LocationBox,
   SearchBox,
+  ItemsNotHover,
 } from "./Presenter/Presenter";
 
 import Text from "../components/Text";
@@ -233,7 +234,7 @@ const FindHospital = () => {
           height="20rem"
         >
           {categories.map((c) => (
-            <Items key={c.id}>{c.text}</Items>
+            <ItemsNotHover key={c.id}>{c.text}</ItemsNotHover>
           ))}
         </Menu>
       ) : (

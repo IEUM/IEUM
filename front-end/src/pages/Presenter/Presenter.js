@@ -61,10 +61,12 @@ export const Menu = styled.div`
   overflow-y: ${(props) => props.overflow || ""};
 `;
 
-export const Items = styled.div`
+export const ItemsNotHover = styled.div`
   width: ${(props) => props.width || "10rem"};
   font-size: 28px;
+`;
 
+export const Items = styled(ItemsNotHover)`
   &:hover {
     background-color: ${palette.ivory};
     color: ${palette.darkBlack};
